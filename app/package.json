@@ -21,6 +21,7 @@
   "devDependencies": {
     "@types/react": "^16.8.19",
     "@types/react-native": "^0.57.60",
+    "@types/styled-components": "^4.1.16",
     "babel-preset-expo": "^5.1.1",
     "typescript": "^3.4.5"
   },

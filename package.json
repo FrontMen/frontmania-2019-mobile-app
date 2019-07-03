@@ -1,0 +1,13 @@
+{
+  "name": "front-mania-conf",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:FrontMen/FrontManiaConfApp.git",
+  "author": "Yasin Uslu <nepjua@gmail.com>",
+  "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "app/",
+    "api/"
+  ]
+}

@@ -9,7 +9,7 @@ const StyledStatusBar = styled.View`
   height: 35px;
 `;
 
-export const DynamicStatusBar = () => {
+export const DynamicStatusBar: React.FC<{}> = () => {
   // maybe something dynamic
   return (
     <StyledStatusBar>

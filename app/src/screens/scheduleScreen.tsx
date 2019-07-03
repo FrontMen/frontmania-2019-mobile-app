@@ -12,7 +12,7 @@ const StyledTabContent = styled(Layout)`
   height: 100%;
 `;
 
-export const ScheduleScreen = () => {
+export const ScheduleScreen: React.FC<{}> = () => {
   const [selectedTab, setSelectedTab] = React.useState(0);
 
   return (
@@ -30,7 +30,7 @@ export const ScheduleScreen = () => {
         </Tab>
         <Tab title="TAB 3">
           <StyledTabContent>
-            <Text>You're done</Text>
+            <Text>You are done</Text>
           </StyledTabContent>
         </Tab>
       </TabView>

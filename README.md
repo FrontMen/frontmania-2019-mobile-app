@@ -24,3 +24,21 @@ cd app
 yarn install
 yarn ios
 ```
+
+## FAQ
+
+### How do I update the database backup?
+
+You can create a database backup in `db-backup/` with following:
+
+```sh
+./scripts/backup-database.sh
+```
+
+### How do I restore the database?
+
+You can restore the database from the backup in `db-backup/` folder using:
+
+```sh
+./scripts/restore-database.sh
+```

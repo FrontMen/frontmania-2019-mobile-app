@@ -6,14 +6,15 @@ const StyledBottomNav = styled.View`
   height: 55px;
 `;
 
+// TODO: use react-navigation
 export const BottomNav: React.FC<{}> = () => {
   const [selectedIndex, setSelectedIndex] = React.useState(0);
   return (
     <StyledBottomNav>
       <BottomNavigation selectedIndex={selectedIndex} onSelect={setSelectedIndex}>
-        <BottomNavigationTab title="Tab 1" />
-        <BottomNavigationTab title="Tab 2" />
-        <BottomNavigationTab title="Tab 3" />
+        <BottomNavigationTab title="Schedule" />
+        <BottomNavigationTab title="Favorites" />
+        <BottomNavigationTab title="About" />
       </BottomNavigation>
     </StyledBottomNav>
   );

@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components/native';
 import { TabView, Tab, Layout } from 'react-native-ui-kitten';
 import { Text } from 'react-native';
+import { Talks } from './talks';
 
 const StyledScheduleScreen = styled.View`
   flex: 1 auto;
@@ -20,7 +21,7 @@ export const ScheduleScreen: React.FC<{}> = () => {
       <TabView selectedIndex={selectedTab} onSelect={setSelectedTab}>
         <Tab title="TAB 1">
           <StyledTabContent>
-            <Text>Swipe next</Text>
+            <Talks />
           </StyledTabContent>
         </Tab>
         <Tab title="TAB 2">

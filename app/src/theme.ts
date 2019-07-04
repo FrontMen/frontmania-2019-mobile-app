@@ -8,7 +8,7 @@ export const evaTheme = {
 // TODO: after figuring out the mapping system, use the actual evaTheme here
 // export const theme = _.mapKeys(evaTheme, (value, key) => _.camelCase(key));
 export const theme = {
-  backgroundBasicColor1: '#222b45',
+  backgroundBasicColor1: '#1A2138',
 };
 
 export const evaMapping = mapping;

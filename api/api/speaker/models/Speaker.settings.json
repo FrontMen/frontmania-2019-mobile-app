@@ -1,0 +1,32 @@
+{
+  "connection": "default",
+  "collectionName": "Speaker",
+  "info": {
+    "name": "speaker",
+    "description": ""
+  },
+  "options": {
+    "timestamps": true
+  },
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "email": {
+      "type": "email"
+    },
+    "avatar": {
+      "model": "file",
+      "via": "related",
+      "plugin": "upload"
+    },
+    "cover": {
+      "model": "file",
+      "via": "related",
+      "plugin": "upload"
+    },
+    "bio": {
+      "type": "text"
+    }
+  }
+}

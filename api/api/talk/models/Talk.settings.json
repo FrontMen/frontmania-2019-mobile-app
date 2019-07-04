@@ -1,0 +1,36 @@
+{
+  "connection": "default",
+  "collectionName": "Talk",
+  "info": {
+    "name": "talk",
+    "description": ""
+  },
+  "options": {
+    "timestamps": true
+  },
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "startsAt": {
+      "type": "date"
+    },
+    "endsAt": {
+      "type": "date"
+    },
+    "room": {
+      "model": "room"
+    },
+    "cover": {
+      "model": "file",
+      "via": "related",
+      "plugin": "upload"
+    },
+    "speaker": {
+      "model": "speaker"
+    }
+  }
+}

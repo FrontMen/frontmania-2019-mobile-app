@@ -1,0 +1,16 @@
+{
+  "connection": "default",
+  "collectionName": "Room",
+  "info": {
+    "name": "room",
+    "description": ""
+  },
+  "options": {
+    "timestamps": true
+  },
+  "attributes": {
+    "name": {
+      "type": "string"
+    }
+  }
+}

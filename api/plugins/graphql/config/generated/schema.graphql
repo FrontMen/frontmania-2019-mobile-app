@@ -6,6 +6,30 @@ type createRolePayload {
   role: UsersPermissionsRole
 }
 
+input createRoomInput {
+  data: RoomInput
+}
+
+type createRoomPayload {
+  room: Room
+}
+
+input createSpeakerInput {
+  data: SpeakerInput
+}
+
+type createSpeakerPayload {
+  speaker: Speaker
+}
+
+input createTalkInput {
+  data: TalkInput
+}
+
+type createTalkPayload {
+  talk: Talk
+}
+
 input createUserInput {
   data: UserInput
 }
@@ -25,6 +49,30 @@ input deleteRoleInput {
 
 type deleteRolePayload {
   role: UsersPermissionsRole
+}
+
+input deleteRoomInput {
+  where: InputID
+}
+
+type deleteRoomPayload {
+  room: Room
+}
+
+input deleteSpeakerInput {
+  where: InputID
+}
+
+type deleteSpeakerPayload {
+  speaker: Speaker
+}
+
+input deleteTalkInput {
+  where: InputID
+}
+
+type deleteTalkPayload {
+  talk: Talk
 }
 
 input deleteUserInput {
@@ -54,6 +102,28 @@ input editRoleInput {
   type: String
   permissions: [ID]
   users: [ID]
+}
+
+input editRoomInput {
+  name: String
+}
+
+input editSpeakerInput {
+  name: String
+  email: String
+  avatar: ID
+  cover: ID
+  bio: String
+}
+
+input editTalkInput {
+  title: String
+  description: String
+  startsAt: DateTime
+  endsAt: DateTime
+  room: ID
+  cover: ID
+  speaker: ID
 }
 
 input editUserInput {
@@ -92,9 +162,19 @@ scalar JSON
 """The `Long` scalar type represents 52-bit integers"""
 scalar Long
 
-union Morph = UsersPermissionsMe | UsersPermissionsMeRole | UploadFile | UploadFileConnection | UploadFileAggregator | UploadFileGroupBy | UploadFileConnection_id | UploadFileConnectionId | UploadFileConnectionCreatedAt | UploadFileConnectionUpdatedAt | UploadFileConnectionName | UploadFileConnectionHash | UploadFileConnectionSha256 | UploadFileConnectionExt | UploadFileConnectionMime | UploadFileConnectionSize | UploadFileConnectionUrl | UploadFileConnectionProvider | UploadFileConnectionPublic_id | UsersPermissionsPermission | UsersPermissionsRole | createRolePayload | updateRolePayload | deleteRolePayload | UsersPermissionsRoleConnection | UsersPermissionsRoleAggregator | UsersPermissionsRoleGroupBy | UsersPermissionsRoleConnection_id | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionType | UsersPermissionsUser | createUserPayload | updateUserPayload | deleteUserPayload | UsersPermissionsUserConnection | UsersPermissionsUserAggregator | UsersPermissionsUserGroupBy | UsersPermissionsUserConnection_id | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionUsername | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionRole
+union Morph = UsersPermissionsMe | UsersPermissionsMeRole | Room | createRoomPayload | updateRoomPayload | deleteRoomPayload | RoomConnection | RoomAggregator | RoomGroupBy | RoomConnection_id | RoomConnectionId | RoomConnectionCreatedAt | RoomConnectionUpdatedAt | RoomConnectionName | Speaker | createSpeakerPayload | updateSpeakerPayload | deleteSpeakerPayload | SpeakerConnection | SpeakerAggregator | SpeakerGroupBy | SpeakerConnection_id | SpeakerConnectionId | SpeakerConnectionCreatedAt | SpeakerConnectionUpdatedAt | SpeakerConnectionName | SpeakerConnectionEmail | SpeakerConnectionAvatar | SpeakerConnectionCover | SpeakerConnectionBio | Talk | createTalkPayload | updateTalkPayload | deleteTalkPayload | TalkConnection | TalkAggregator | TalkGroupBy | TalkConnection_id | TalkConnectionId | TalkConnectionCreatedAt | TalkConnectionUpdatedAt | TalkConnectionTitle | TalkConnectionDescription | TalkConnectionStartsAt | TalkConnectionEndsAt | TalkConnectionRoom | TalkConnectionCover | TalkConnectionSpeaker | UploadFile | UploadFileConnection | UploadFileAggregator | UploadFileGroupBy | UploadFileConnection_id | UploadFileConnectionId | UploadFileConnectionCreatedAt | UploadFileConnectionUpdatedAt | UploadFileConnectionName | UploadFileConnectionHash | UploadFileConnectionSha256 | UploadFileConnectionExt | UploadFileConnectionMime | UploadFileConnectionSize | UploadFileConnectionUrl | UploadFileConnectionProvider | UploadFileConnectionPublic_id | UsersPermissionsPermission | UsersPermissionsRole | createRolePayload | updateRolePayload | deleteRolePayload | UsersPermissionsRoleConnection | UsersPermissionsRoleAggregator | UsersPermissionsRoleGroupBy | UsersPermissionsRoleConnection_id | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionType | UsersPermissionsUser | createUserPayload | updateUserPayload | deleteUserPayload | UsersPermissionsUserConnection | UsersPermissionsUserAggregator | UsersPermissionsUserGroupBy | UsersPermissionsUserConnection_id | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionUsername | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionRole
 
 type Mutation {
+  createRoom(input: createRoomInput): createRoomPayload
+  updateRoom(input: updateRoomInput): updateRoomPayload
+  deleteRoom(input: deleteRoomInput): deleteRoomPayload
+  createSpeaker(input: createSpeakerInput): createSpeakerPayload
+  updateSpeaker(input: updateSpeakerInput): updateSpeakerPayload
+  deleteSpeaker(input: deleteSpeakerInput): deleteSpeakerPayload
+  createTalk(input: createTalkInput): createTalkPayload
+  updateTalk(input: updateTalkInput): updateTalkPayload
+  deleteTalk(input: deleteTalkInput): deleteTalkPayload
+
   """Create a new role"""
   createRole(input: createRoleInput): createRolePayload
 
@@ -116,6 +196,15 @@ type Mutation {
 }
 
 type Query {
+  room(id: ID!): Room
+  rooms(sort: String, limit: Int, start: Int, where: JSON): [Room]
+  roomsConnection(sort: String, limit: Int, start: Int, where: JSON): RoomConnection
+  speaker(id: ID!): Speaker
+  speakers(sort: String, limit: Int, start: Int, where: JSON): [Speaker]
+  speakersConnection(sort: String, limit: Int, start: Int, where: JSON): SpeakerConnection
+  talk(id: ID!): Talk
+  talks(sort: String, limit: Int, start: Int, where: JSON): [Talk]
+  talksConnection(sort: String, limit: Int, start: Int, where: JSON): TalkConnection
   files(sort: String, limit: Int, start: Int, where: JSON): [UploadFile]
   filesConnection(sort: String, limit: Int, start: Int, where: JSON): UploadFileConnection
   role(id: ID!): UsersPermissionsRole
@@ -139,6 +228,254 @@ input RoleInput {
   users: [ID]
 }
 
+type Room {
+  _id: ID!
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  name: String
+}
+
+type RoomAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type RoomConnection {
+  values: [Room]
+  groupBy: RoomGroupBy
+  aggregate: RoomAggregator
+}
+
+type RoomConnection_id {
+  key: ID
+  connection: RoomConnection
+}
+
+type RoomConnectionCreatedAt {
+  key: DateTime
+  connection: RoomConnection
+}
+
+type RoomConnectionId {
+  key: ID
+  connection: RoomConnection
+}
+
+type RoomConnectionName {
+  key: String
+  connection: RoomConnection
+}
+
+type RoomConnectionUpdatedAt {
+  key: DateTime
+  connection: RoomConnection
+}
+
+type RoomGroupBy {
+  _id: [RoomConnection_id]
+  id: [RoomConnectionId]
+  createdAt: [RoomConnectionCreatedAt]
+  updatedAt: [RoomConnectionUpdatedAt]
+  name: [RoomConnectionName]
+}
+
+input RoomInput {
+  name: String
+}
+
+type Speaker {
+  _id: ID!
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  name: String
+  email: String
+  avatar: UploadFile
+  cover: UploadFile
+  bio: String
+}
+
+type SpeakerAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type SpeakerConnection {
+  values: [Speaker]
+  groupBy: SpeakerGroupBy
+  aggregate: SpeakerAggregator
+}
+
+type SpeakerConnection_id {
+  key: ID
+  connection: SpeakerConnection
+}
+
+type SpeakerConnectionAvatar {
+  key: ID
+  connection: SpeakerConnection
+}
+
+type SpeakerConnectionBio {
+  key: String
+  connection: SpeakerConnection
+}
+
+type SpeakerConnectionCover {
+  key: ID
+  connection: SpeakerConnection
+}
+
+type SpeakerConnectionCreatedAt {
+  key: DateTime
+  connection: SpeakerConnection
+}
+
+type SpeakerConnectionEmail {
+  key: String
+  connection: SpeakerConnection
+}
+
+type SpeakerConnectionId {
+  key: ID
+  connection: SpeakerConnection
+}
+
+type SpeakerConnectionName {
+  key: String
+  connection: SpeakerConnection
+}
+
+type SpeakerConnectionUpdatedAt {
+  key: DateTime
+  connection: SpeakerConnection
+}
+
+type SpeakerGroupBy {
+  _id: [SpeakerConnection_id]
+  id: [SpeakerConnectionId]
+  createdAt: [SpeakerConnectionCreatedAt]
+  updatedAt: [SpeakerConnectionUpdatedAt]
+  name: [SpeakerConnectionName]
+  email: [SpeakerConnectionEmail]
+  avatar: [SpeakerConnectionAvatar]
+  cover: [SpeakerConnectionCover]
+  bio: [SpeakerConnectionBio]
+}
+
+input SpeakerInput {
+  name: String
+  email: String
+  avatar: ID
+  cover: ID
+  bio: String
+}
+
+type Talk {
+  _id: ID!
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  title: String
+  description: String
+  startsAt: DateTime
+  endsAt: DateTime
+  room: Room
+  cover: UploadFile
+  speaker: Speaker
+}
+
+type TalkAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type TalkConnection {
+  values: [Talk]
+  groupBy: TalkGroupBy
+  aggregate: TalkAggregator
+}
+
+type TalkConnection_id {
+  key: ID
+  connection: TalkConnection
+}
+
+type TalkConnectionCover {
+  key: ID
+  connection: TalkConnection
+}
+
+type TalkConnectionCreatedAt {
+  key: DateTime
+  connection: TalkConnection
+}
+
+type TalkConnectionDescription {
+  key: String
+  connection: TalkConnection
+}
+
+type TalkConnectionEndsAt {
+  key: DateTime
+  connection: TalkConnection
+}
+
+type TalkConnectionId {
+  key: ID
+  connection: TalkConnection
+}
+
+type TalkConnectionRoom {
+  key: ID
+  connection: TalkConnection
+}
+
+type TalkConnectionSpeaker {
+  key: ID
+  connection: TalkConnection
+}
+
+type TalkConnectionStartsAt {
+  key: DateTime
+  connection: TalkConnection
+}
+
+type TalkConnectionTitle {
+  key: String
+  connection: TalkConnection
+}
+
+type TalkConnectionUpdatedAt {
+  key: DateTime
+  connection: TalkConnection
+}
+
+type TalkGroupBy {
+  _id: [TalkConnection_id]
+  id: [TalkConnectionId]
+  createdAt: [TalkConnectionCreatedAt]
+  updatedAt: [TalkConnectionUpdatedAt]
+  title: [TalkConnectionTitle]
+  description: [TalkConnectionDescription]
+  startsAt: [TalkConnectionStartsAt]
+  endsAt: [TalkConnectionEndsAt]
+  room: [TalkConnectionRoom]
+  cover: [TalkConnectionCover]
+  speaker: [TalkConnectionSpeaker]
+}
+
+input TalkInput {
+  title: String
+  description: String
+  startsAt: DateTime
+  endsAt: DateTime
+  room: ID
+  cover: ID
+  speaker: ID
+}
+
 input updateRoleInput {
   where: InputID
   data: editRoleInput
@@ -146,6 +483,33 @@ input updateRoleInput {
 
 type updateRolePayload {
   role: UsersPermissionsRole
+}
+
+input updateRoomInput {
+  where: InputID
+  data: editRoomInput
+}
+
+type updateRoomPayload {
+  room: Room
+}
+
+input updateSpeakerInput {
+  where: InputID
+  data: editSpeakerInput
+}
+
+type updateSpeakerPayload {
+  speaker: Speaker
+}
+
+input updateTalkInput {
+  where: InputID
+  data: editTalkInput
+}
+
+type updateTalkPayload {
+  talk: Talk
 }
 
 input updateUserInput {

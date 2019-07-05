@@ -4,7 +4,7 @@ import styled, { ThemeProvider as StyledComponentsThemeProvider } from 'styled-c
 
 import { GraphQLClient, ClientContext } from 'graphql-hooks';
 import { BottomNav } from './bottomNav';
-import { Content } from './content';
+import { AppNavigatorContainer } from './appNavigator';
 import { DynamicStatusBar } from './dynamicStatusBar';
 import { evaMapping, evaTheme, theme } from './theme';
 
@@ -23,7 +23,7 @@ export const App: React.FC<{}> = () => (
       <StyledComponentsThemeProvider theme={theme}>
         <Container>
           <DynamicStatusBar />
-          <Content />
+          <AppNavigatorContainer />
           <BottomNav />
         </Container>
       </StyledComponentsThemeProvider>

@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import { TabView, Tab, Layout } from 'react-native-ui-kitten';
+import { TabView, Tab, Layout, Button } from 'react-native-ui-kitten';
 import { Text } from 'react-native';
 import { Talks } from './talks';
 
@@ -13,7 +13,7 @@ const StyledTabContent = styled(Layout)`
   height: 100%;
 `;
 
-export const ScheduleScreen: React.FC<{}> = () => {
+export const ScheduleScreen: React.FC<{ navigation }> = () => {
   const [selectedTab, setSelectedTab] = React.useState(0);
 
   return (

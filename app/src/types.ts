@@ -1,3 +1,7 @@
+export interface Image {
+  url: string;
+}
+
 export interface Room {
   id: string;
   name: string;
@@ -7,8 +11,8 @@ export interface Speaker {
   id: string;
   name: string;
   email: string;
-  avatar: null;
-  cover: null;
+  avatar: Image | null;
+  cover: Image | null;
   bio: string;
 }
 
@@ -18,7 +22,7 @@ export interface Talk {
   description: string;
   startsAt: Date;
   endsAt: Date;
-  cover: null;
+  cover: Image | null;
   room: Room;
   speaker: Speaker;
 }

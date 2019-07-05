@@ -7,6 +7,7 @@ import { BottomNav } from './bottomNav';
 import { AppNavigatorContainer } from './appNavigator';
 import { DynamicStatusBar } from './dynamicStatusBar';
 import { evaMapping, evaTheme, theme } from './theme';
+import { DataProvider } from './dataProvider';
 
 const Container = styled.View`
   flex: 1;
@@ -21,11 +22,13 @@ export const App: React.FC<{}> = () => (
   <ClientContext.Provider value={client}>
     <ApplicationProvider mapping={evaMapping} theme={evaTheme}>
       <StyledComponentsThemeProvider theme={theme}>
-        <Container>
-          <DynamicStatusBar />
-          <AppNavigatorContainer />
-          <BottomNav />
-        </Container>
+        <DataProvider>
+          <Container>
+            <DynamicStatusBar />
+            <AppNavigatorContainer />
+            <BottomNav />
+          </Container>
+        </DataProvider>
       </StyledComponentsThemeProvider>
     </ApplicationProvider>
   </ClientContext.Provider>

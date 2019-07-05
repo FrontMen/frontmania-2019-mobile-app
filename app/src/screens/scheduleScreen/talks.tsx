@@ -1,15 +1,11 @@
 import React from 'react';
 import { List, ListItem } from 'react-native-ui-kitten';
+import { Talk } from '../../types';
 
-const data = Array.from({ length: 10 }).map((_, index) => ({
-  title: `Item ${index}`,
-  description: `Description ${index}`,
-}));
-
-export const Talks: React.FC<{}> = () => {
-  const renderItem = ({ item }) => {
-    return <ListItem title={item.title} description={item.description} />;
+export const Talks: React.FC<{ talks: Talk[] }> = ({ talks }) => {
+  const renderItem: React.FC<{ item: Talk }> = ({ item }) => {
+    return <ListItem key={item.id} title={item.title} />;
   };
 
-  return <List data={data} renderItem={renderItem} />;
+  return <List data={talks} renderItem={renderItem} />;
 };

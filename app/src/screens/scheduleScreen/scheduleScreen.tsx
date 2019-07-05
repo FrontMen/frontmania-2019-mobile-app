@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components/native';
-import { TabView, Tab, Layout, Button } from 'react-native-ui-kitten';
-import { Text } from 'react-native';
+import { TabView, Tab, Layout } from 'react-native-ui-kitten';
+import _ from 'lodash';
 import { Talks } from './talks';
+import { Talk } from '../../types';
+import { useDataProvider } from '../../dataProvider';
 
 const StyledScheduleScreen = styled.View`
   flex: 1 auto;
@@ -13,27 +15,29 @@ const StyledTabContent = styled(Layout)`
   height: 100%;
 `;
 
-export const ScheduleScreen: React.FC<{ navigation }> = () => {
-  const [selectedTab, setSelectedTab] = React.useState(0);
+// TODO: check if we use lodash in other places, if not just remove it and refactor here
+const getTalksByRoom = (talks: Talk[]): { [key: string]: Talk[] } => {
+  return _.chain(talks)
+    .groupBy(t => t.room.name)
+    .value();
+};
+
+export const ScheduleScreen: React.FC<{}> = () => {
+  const [selectedTab, setSelectedTab] = useState(0);
+  const data = useDataProvider();
+
+  const talksByRoom = getTalksByRoom(data.talks);
 
   return (
     <StyledScheduleScreen>
       <TabView selectedIndex={selectedTab} onSelect={setSelectedTab}>
-        <Tab title="TAB 1">
-          <StyledTabContent>
-            <Talks />
-          </StyledTabContent>
-        </Tab>
-        <Tab title="TAB 2">
-          <StyledTabContent>
-            <Text>Swipe next</Text>
-          </StyledTabContent>
-        </Tab>
-        <Tab title="TAB 3">
-          <StyledTabContent>
-            <Text>You are done</Text>
-          </StyledTabContent>
-        </Tab>
+        {Object.keys(talksByRoom).map(room => (
+          <Tab key={room} title={room}>
+            <StyledTabContent>
+              <Talks talks={talksByRoom[room]} />
+            </StyledTabContent>
+          </Tab>
+        ))}
       </TabView>
     </StyledScheduleScreen>
   );

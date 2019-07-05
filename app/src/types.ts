@@ -1,0 +1,28 @@
+export interface Image {
+  url: string;
+}
+
+export interface Room {
+  id: string;
+  name: string;
+}
+
+export interface Speaker {
+  id: string;
+  name: string;
+  email: string;
+  avatar: Image | null;
+  cover: Image | null;
+  bio: string;
+}
+
+export interface Talk {
+  id: string;
+  title: string;
+  description: string;
+  startsAt: Date;
+  endsAt: Date;
+  cover: Image | null;
+  room: Room;
+  speaker: Speaker;
+}

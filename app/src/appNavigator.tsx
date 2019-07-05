@@ -1,15 +1,49 @@
-import { createStackNavigator, createAppContainer } from 'react-navigation';
+import {
+  createBottomTabNavigator,
+  createAppContainer,
+  createStackNavigator,
+  StackNavigatorConfig,
+} from 'react-navigation';
 import { ScheduleScreen } from './screens/scheduleScreen/scheduleScreen';
 import { SpeakerScreen } from './screens/speakers/speakerScreen';
+import { BottomNav } from './bottomNav';
+import { FavoriteScreen } from './screens/favoriteScreen/favoriteScreen';
+import { AboutScreen } from './screens/aboutScreen/aboutScreen';
+// import { TalkDetailScreen } from './screens/speakers/talkDetailScreen';
 
-const AppNavigator = createStackNavigator(
+const defaultTabOptions: StackNavigatorConfig = { headerMode: 'none' };
+
+const ScheduleNavigator = createStackNavigator(
   {
-    Home: ScheduleScreen,
+    Schedule: ScheduleScreen,
     Speaker: SpeakerScreen,
   },
+  { ...defaultTabOptions },
+);
+
+const FavoriteNavigator = createStackNavigator(
   {
-    initialRouteName: 'Home',
-    headerMode: 'none',
+    Favorite: FavoriteScreen,
+  },
+  { ...defaultTabOptions },
+);
+
+const AboutNavigator = createStackNavigator(
+  {
+    About: AboutScreen,
+  },
+  { ...defaultTabOptions },
+);
+
+const AppNavigator = createBottomTabNavigator(
+  {
+    Schedule: ScheduleNavigator,
+    Favorite: FavoriteNavigator,
+    About: AboutNavigator,
+  },
+  {
+    initialRouteName: 'Schedule',
+    tabBarComponent: BottomNav,
   },
 );
 

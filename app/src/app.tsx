@@ -26,7 +26,6 @@ export const App: React.FC<{}> = () => (
           <Container>
             <DynamicStatusBar />
             <AppNavigatorContainer />
-            <BottomNav />
           </Container>
         </DataProvider>
       </StyledComponentsThemeProvider>

@@ -21,15 +21,20 @@ const Time: React.FC<{ style: StyleType; time: Date }> = ({ style, time }) => (
   </StyledTime>
 );
 
+const renderTalkDescription = (item: Talk): string => {
+  return [
+    `${formatTime(item.startsAt)} - ${formatTime(item.endsAt)}`,
+    `by ${item.speaker.name}`,
+  ].join('\n');
+};
+
 const renderTalkItem: React.FC<{ item: Talk }> = ({ item }) => {
   return (
     <ListItem
       icon={({ style }) => <Time style={style} time={item.startsAt} />}
       key={item.id}
       title={item.title}
-      description={`${formatTime(item.startsAt)} - ${formatTime(item.endsAt)}\nby ${
-        item.speaker.name
-      }`}
+      description={renderTalkDescription(item)}
     />
   );
 };

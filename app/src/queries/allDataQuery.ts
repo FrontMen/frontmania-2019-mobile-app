@@ -21,6 +21,8 @@ export const allDataQuery = /* GraphQL */ `
     talks {
       id
       title
+      startsAt
+      endsAt
       description
 
       cover {

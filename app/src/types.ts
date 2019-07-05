@@ -16,6 +16,8 @@ export interface Talk {
   id: string;
   title: string;
   description: string;
+  startsAt: Date;
+  endsAt: Date;
   cover: null;
   room: Room;
   speaker: Speaker;

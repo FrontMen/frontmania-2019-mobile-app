@@ -16,6 +16,10 @@ export interface Speaker {
   bio: string;
 }
 
+export interface Tag {
+  name: string;
+}
+
 export interface Talk {
   id: string;
   title: string;
@@ -24,5 +28,6 @@ export interface Talk {
   endsAt: Date;
   cover: Image | null;
   room: Room;
-  speaker: Speaker;
+  speakers: Speaker[];
+  tags: Tag[];
 }

@@ -29,8 +29,15 @@
       "via": "related",
       "plugin": "upload"
     },
-    "speaker": {
-      "model": "speaker"
+    "speakers": {
+      "collection": "speaker",
+      "via": "talks",
+      "dominant": true
+    },
+    "tags": {
+      "collection": "tag",
+      "dominant": true,
+      "via": "talks"
     }
   }
 }

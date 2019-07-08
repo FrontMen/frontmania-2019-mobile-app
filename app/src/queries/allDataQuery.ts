@@ -24,16 +24,21 @@ export const allDataQuery = /* GraphQL */ `
       startsAt
       endsAt
       description
+      tags {
+        name
+      }
 
       cover {
         url
       }
 
       room {
+        id
         name
       }
 
-      speaker {
+      speakers {
+        id
         name
       }
     }

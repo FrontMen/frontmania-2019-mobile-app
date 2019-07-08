@@ -2,48 +2,48 @@
   "routes": [
     {
       "method": "GET",
-      "path": "/talks",
-      "handler": "Talk.find",
+      "path": "/tags",
+      "handler": "Tag.find",
       "config": {
         "policies": []
       }
     },
     {
       "method": "GET",
-      "path": "/talks/count",
-      "handler": "Talk.count",
+      "path": "/tags/count",
+      "handler": "Tag.count",
       "config": {
         "policies": []
       }
     },
     {
       "method": "GET",
-      "path": "/talks/:_id",
-      "handler": "Talk.findOne",
+      "path": "/tags/:_id",
+      "handler": "Tag.findOne",
       "config": {
         "policies": []
       }
     },
     {
       "method": "POST",
-      "path": "/talks",
-      "handler": "Talk.create",
+      "path": "/tags",
+      "handler": "Tag.create",
       "config": {
         "policies": []
       }
     },
     {
       "method": "PUT",
-      "path": "/talks/:_id",
-      "handler": "Talk.update",
+      "path": "/tags/:_id",
+      "handler": "Tag.update",
       "config": {
         "policies": []
       }
     },
     {
       "method": "DELETE",
-      "path": "/talks/:_id",
-      "handler": "Talk.destroy",
+      "path": "/tags/:_id",
+      "handler": "Tag.destroy",
       "config": {
         "policies": []
       }

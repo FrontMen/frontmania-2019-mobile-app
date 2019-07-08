@@ -1,0 +1,22 @@
+{
+  "connection": "default",
+  "collectionName": "Tag",
+  "info": {
+    "name": "tag",
+    "description": ""
+  },
+  "options": {
+    "timestamps": true
+  },
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "talks": {
+      "collection": "talk",
+      "via": "tags"
+    }
+  }
+}

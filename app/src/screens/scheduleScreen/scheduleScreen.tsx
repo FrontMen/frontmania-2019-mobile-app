@@ -22,11 +22,15 @@ const getTalksByRoom = (talks: Talk[]): { [key: string]: Talk[] } => {
     .value();
 };
 
-export const ScheduleScreen: React.FC<{}> = () => {
+export const ScheduleScreen: React.FC<{ navigation }> = ({ navigation }) => {
   const [selectedTab, setSelectedTab] = useState(0);
   const data = useDataProvider();
 
   const talksByRoom = getTalksByRoom(data.talks);
+
+  function handleItemPress(talk: Talk): void {
+    navigation.navigate('TalkDetail', { talkId: talk.id, title: talk.title });
+  }
 
   return (
     <StyledScheduleScreen>
@@ -34,7 +38,7 @@ export const ScheduleScreen: React.FC<{}> = () => {
         {Object.keys(talksByRoom).map(room => (
           <Tab key={room} title={room}>
             <StyledTabContent>
-              <Talks talks={talksByRoom[room]} />
+              <Talks talks={talksByRoom[room]} onPress={handleItemPress} />
             </StyledTabContent>
           </Tab>
         ))}

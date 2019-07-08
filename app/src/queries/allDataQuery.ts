@@ -30,10 +30,12 @@ export const allDataQuery = /* GraphQL */ `
       }
 
       room {
+        id
         name
       }
 
       speaker {
+        id
         name
       }
     }

@@ -28,17 +28,21 @@ const renderTalkDescription = (item: Talk): string => {
   ].join('\n');
 };
 
-const renderTalkItem: React.FC<{ item: Talk }> = ({ item }) => {
-  return (
-    <ListItem
-      icon={({ style }) => <Time style={style} time={item.startsAt} />}
-      key={item.id}
-      title={item.title}
-      description={renderTalkDescription(item)}
-    />
-  );
-};
+export const Talks: React.FC<{ talks: Talk[]; onPress: (talk: Talk) => void }> = ({
+  talks,
+  onPress,
+}) => {
+  const renderTalkItem: React.FC<{ item: Talk }> = ({ item }) => {
+    return (
+      <ListItem
+        icon={({ style }) => <Time style={style} time={item.startsAt} />}
+        key={item.id}
+        title={item.title}
+        description={renderTalkDescription(item)}
+        onPress={() => onPress(item)}
+      />
+    );
+  };
 
-export const Talks: React.FC<{ talks: Talk[] }> = ({ talks }) => {
   return <List data={talks} renderItem={renderTalkItem} />;
 };

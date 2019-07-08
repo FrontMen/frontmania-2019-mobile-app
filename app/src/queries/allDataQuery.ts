@@ -37,7 +37,7 @@ export const allDataQuery = /* GraphQL */ `
         name
       }
 
-      speaker {
+      speakers {
         id
         name
       }

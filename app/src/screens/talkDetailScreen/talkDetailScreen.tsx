@@ -5,6 +5,7 @@ import { theme } from '../../theme';
 import { useDataProvider } from '../../dataProvider';
 import { formatTime } from '../../utils';
 import { MarkdownText } from '../../components/markdownText';
+import { Tag } from '../../components/tag';
 
 const StyledTalkDetailScreen = styled.ScrollView`
   display: flex;
@@ -38,6 +39,11 @@ const TalkInfoBar = styled.View`
   margin-bottom: 10px;
 `;
 
+const TagsBar = styled.View`
+  flex-direction: row;
+  flex-wrap: wrap;
+`;
+
 export const TalkDetailScreen: React.FC<{ navigation }> = ({ navigation }) => {
   const talkId = navigation.getParam('talkId');
   const data = useDataProvider();
@@ -55,6 +61,11 @@ export const TalkDetailScreen: React.FC<{ navigation }> = ({ navigation }) => {
           <IconText>{` ${room.name}`}</IconText>
         </Octicons>
       </TalkInfoBar>
+      <TagsBar>
+        {talk.tags.map(tag => (
+          <Tag text={tag.name} />
+        ))}
+      </TagsBar>
       <DescriptionContainer>
         <MarkdownText>{talk.description}</MarkdownText>
       </DescriptionContainer>

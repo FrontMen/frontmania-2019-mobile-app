@@ -6,7 +6,7 @@ import { useDataProvider } from '../../dataProvider';
 import { formatTime } from '../../utils';
 import { MarkdownText } from '../../components/markdownText';
 
-const StyledTalkDetailScreen = styled.View`
+const StyledTalkDetailScreen = styled.ScrollView`
   display: flex;
   flex: 1 auto;
   background-color: ${theme.backgroundBasicColor1};

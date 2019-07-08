@@ -4,7 +4,7 @@ import { AntDesign, Octicons } from '@expo/vector-icons';
 import { theme } from '../../theme';
 import { useDataProvider } from '../../dataProvider';
 import { formatTime } from '../../utils';
-import { MarkdownText } from '../../components/MarkdownText';
+import { MarkdownText } from '../../components/markdownText';
 
 const StyledTalkDetailScreen = styled.View`
   display: flex;

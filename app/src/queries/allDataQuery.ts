@@ -24,6 +24,9 @@ export const allDataQuery = /* GraphQL */ `
       startsAt
       endsAt
       description
+      tags {
+        name
+      }
 
       cover {
         url

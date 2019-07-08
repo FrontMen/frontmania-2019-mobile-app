@@ -1,11 +1,3 @@
-input createLabelInput {
-  data: LabelInput
-}
-
-type createLabelPayload {
-  label: Label
-}
-
 input createRoleInput {
   data: RoleInput
 }
@@ -30,6 +22,14 @@ type createSpeakerPayload {
   speaker: Speaker
 }
 
+input createTagInput {
+  data: TagInput
+}
+
+type createTagPayload {
+  tag: Tag
+}
+
 input createTalkInput {
   data: TalkInput
 }
@@ -50,14 +50,6 @@ type createUserPayload {
 The `DateTime` scalar represents a date and time following the ISO 8601 standard
 """
 scalar DateTime
-
-input deleteLabelInput {
-  where: InputID
-}
-
-type deleteLabelPayload {
-  label: Label
-}
 
 input deleteRoleInput {
   where: InputID
@@ -81,6 +73,14 @@ input deleteSpeakerInput {
 
 type deleteSpeakerPayload {
   speaker: Speaker
+}
+
+input deleteTagInput {
+  where: InputID
+}
+
+type deleteTagPayload {
+  tag: Tag
 }
 
 input deleteTalkInput {
@@ -112,11 +112,6 @@ input editFileInput {
   related: [ID]
 }
 
-input editLabelInput {
-  name: String
-  talks: [ID]
-}
-
 input editRoleInput {
   name: String
   description: String
@@ -135,6 +130,12 @@ input editSpeakerInput {
   avatar: ID
   cover: ID
   bio: String
+  talks: [ID]
+}
+
+input editTagInput {
+  name: String
+  talks: [ID]
 }
 
 input editTalkInput {
@@ -144,8 +145,8 @@ input editTalkInput {
   endsAt: DateTime
   room: ID
   cover: ID
-  speaker: ID
-  labels: [ID]
+  speakers: [ID]
+  tags: [ID]
 }
 
 input editUserInput {
@@ -181,79 +182,21 @@ The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://
 """
 scalar JSON
 
-type Label {
-  _id: ID!
-  id: ID!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  name: String
-  talks(sort: String, limit: Int, start: Int, where: JSON): [Talk]
-}
-
-type LabelAggregator {
-  count: Int
-  totalCount: Int
-}
-
-type LabelConnection {
-  values: [Label]
-  groupBy: LabelGroupBy
-  aggregate: LabelAggregator
-}
-
-type LabelConnection_id {
-  key: ID
-  connection: LabelConnection
-}
-
-type LabelConnectionCreatedAt {
-  key: DateTime
-  connection: LabelConnection
-}
-
-type LabelConnectionId {
-  key: ID
-  connection: LabelConnection
-}
-
-type LabelConnectionName {
-  key: String
-  connection: LabelConnection
-}
-
-type LabelConnectionUpdatedAt {
-  key: DateTime
-  connection: LabelConnection
-}
-
-type LabelGroupBy {
-  _id: [LabelConnection_id]
-  id: [LabelConnectionId]
-  createdAt: [LabelConnectionCreatedAt]
-  updatedAt: [LabelConnectionUpdatedAt]
-  name: [LabelConnectionName]
-}
-
-input LabelInput {
-  name: String
-  talks: [ID]
-}
-
 """The `Long` scalar type represents 52-bit integers"""
 scalar Long
 
-union Morph = UsersPermissionsMe | UsersPermissionsMeRole | Label | createLabelPayload | updateLabelPayload | deleteLabelPayload | LabelConnection | LabelAggregator | LabelGroupBy | LabelConnection_id | LabelConnectionId | LabelConnectionCreatedAt | LabelConnectionUpdatedAt | LabelConnectionName | Room | createRoomPayload | updateRoomPayload | deleteRoomPayload | RoomConnection | RoomAggregator | RoomGroupBy | RoomConnection_id | RoomConnectionId | RoomConnectionCreatedAt | RoomConnectionUpdatedAt | RoomConnectionName | Speaker | createSpeakerPayload | updateSpeakerPayload | deleteSpeakerPayload | SpeakerConnection | SpeakerAggregator | SpeakerGroupBy | SpeakerConnection_id | SpeakerConnectionId | SpeakerConnectionCreatedAt | SpeakerConnectionUpdatedAt | SpeakerConnectionName | SpeakerConnectionEmail | SpeakerConnectionAvatar | SpeakerConnectionCover | SpeakerConnectionBio | Talk | createTalkPayload | updateTalkPayload | deleteTalkPayload | TalkConnection | TalkAggregator | TalkGroupBy | TalkConnection_id | TalkConnectionId | TalkConnectionCreatedAt | TalkConnectionUpdatedAt | TalkConnectionTitle | TalkConnectionDescription | TalkConnectionStartsAt | TalkConnectionEndsAt | TalkConnectionRoom | TalkConnectionCover | TalkConnectionSpeaker | UploadFile | UploadFileConnection | UploadFileAggregator | UploadFileGroupBy | UploadFileConnection_id | UploadFileConnectionId | UploadFileConnectionCreatedAt | UploadFileConnectionUpdatedAt | UploadFileConnectionName | UploadFileConnectionHash | UploadFileConnectionSha256 | UploadFileConnectionExt | UploadFileConnectionMime | UploadFileConnectionSize | UploadFileConnectionUrl | UploadFileConnectionProvider | UploadFileConnectionPublic_id | UsersPermissionsPermission | UsersPermissionsRole | createRolePayload | updateRolePayload | deleteRolePayload | UsersPermissionsRoleConnection | UsersPermissionsRoleAggregator | UsersPermissionsRoleGroupBy | UsersPermissionsRoleConnection_id | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionType | UsersPermissionsUser | createUserPayload | updateUserPayload | deleteUserPayload | UsersPermissionsUserConnection | UsersPermissionsUserAggregator | UsersPermissionsUserGroupBy | UsersPermissionsUserConnection_id | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionUsername | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionRole
+union Morph = UsersPermissionsMe | UsersPermissionsMeRole | Room | createRoomPayload | updateRoomPayload | deleteRoomPayload | RoomConnection | RoomAggregator | RoomGroupBy | RoomConnection_id | RoomConnectionId | RoomConnectionCreatedAt | RoomConnectionUpdatedAt | RoomConnectionName | Speaker | createSpeakerPayload | updateSpeakerPayload | deleteSpeakerPayload | SpeakerConnection | SpeakerAggregator | SpeakerGroupBy | SpeakerConnection_id | SpeakerConnectionId | SpeakerConnectionCreatedAt | SpeakerConnectionUpdatedAt | SpeakerConnectionName | SpeakerConnectionEmail | SpeakerConnectionAvatar | SpeakerConnectionCover | SpeakerConnectionBio | Tag | createTagPayload | updateTagPayload | deleteTagPayload | TagConnection | TagAggregator | TagGroupBy | TagConnection_id | TagConnectionId | TagConnectionCreatedAt | TagConnectionUpdatedAt | TagConnectionName | Talk | createTalkPayload | updateTalkPayload | deleteTalkPayload | TalkConnection | TalkAggregator | TalkGroupBy | TalkConnection_id | TalkConnectionId | TalkConnectionCreatedAt | TalkConnectionUpdatedAt | TalkConnectionTitle | TalkConnectionDescription | TalkConnectionStartsAt | TalkConnectionEndsAt | TalkConnectionRoom | TalkConnectionCover | UploadFile | UploadFileConnection | UploadFileAggregator | UploadFileGroupBy | UploadFileConnection_id | UploadFileConnectionId | UploadFileConnectionCreatedAt | UploadFileConnectionUpdatedAt | UploadFileConnectionName | UploadFileConnectionHash | UploadFileConnectionSha256 | UploadFileConnectionExt | UploadFileConnectionMime | UploadFileConnectionSize | UploadFileConnectionUrl | UploadFileConnectionProvider | UploadFileConnectionPublic_id | UsersPermissionsPermission | UsersPermissionsRole | createRolePayload | updateRolePayload | deleteRolePayload | UsersPermissionsRoleConnection | UsersPermissionsRoleAggregator | UsersPermissionsRoleGroupBy | UsersPermissionsRoleConnection_id | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionType | UsersPermissionsUser | createUserPayload | updateUserPayload | deleteUserPayload | UsersPermissionsUserConnection | UsersPermissionsUserAggregator | UsersPermissionsUserGroupBy | UsersPermissionsUserConnection_id | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionUsername | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionRole
 
 type Mutation {
-  createLabel(input: createLabelInput): createLabelPayload
-  updateLabel(input: updateLabelInput): updateLabelPayload
-  deleteLabel(input: deleteLabelInput): deleteLabelPayload
   createRoom(input: createRoomInput): createRoomPayload
   updateRoom(input: updateRoomInput): updateRoomPayload
   deleteRoom(input: deleteRoomInput): deleteRoomPayload
   createSpeaker(input: createSpeakerInput): createSpeakerPayload
   updateSpeaker(input: updateSpeakerInput): updateSpeakerPayload
   deleteSpeaker(input: deleteSpeakerInput): deleteSpeakerPayload
+  createTag(input: createTagInput): createTagPayload
+  updateTag(input: updateTagInput): updateTagPayload
+  deleteTag(input: deleteTagInput): deleteTagPayload
   createTalk(input: createTalkInput): createTalkPayload
   updateTalk(input: updateTalkInput): updateTalkPayload
   deleteTalk(input: deleteTalkInput): deleteTalkPayload
@@ -279,15 +222,15 @@ type Mutation {
 }
 
 type Query {
-  label(id: ID!): Label
-  labels(sort: String, limit: Int, start: Int, where: JSON): [Label]
-  labelsConnection(sort: String, limit: Int, start: Int, where: JSON): LabelConnection
   room(id: ID!): Room
   rooms(sort: String, limit: Int, start: Int, where: JSON): [Room]
   roomsConnection(sort: String, limit: Int, start: Int, where: JSON): RoomConnection
   speaker(id: ID!): Speaker
   speakers(sort: String, limit: Int, start: Int, where: JSON): [Speaker]
   speakersConnection(sort: String, limit: Int, start: Int, where: JSON): SpeakerConnection
+  tag(id: ID!): Tag
+  tags(sort: String, limit: Int, start: Int, where: JSON): [Tag]
+  tagsConnection(sort: String, limit: Int, start: Int, where: JSON): TagConnection
   talk(id: ID!): Talk
   talks(sort: String, limit: Int, start: Int, where: JSON): [Talk]
   talksConnection(sort: String, limit: Int, start: Int, where: JSON): TalkConnection
@@ -380,6 +323,7 @@ type Speaker {
   avatar: UploadFile
   cover: UploadFile
   bio: String
+  talks(sort: String, limit: Int, start: Int, where: JSON): [Talk]
 }
 
 type SpeakerAggregator {
@@ -456,6 +400,65 @@ input SpeakerInput {
   avatar: ID
   cover: ID
   bio: String
+  talks: [ID]
+}
+
+type Tag {
+  _id: ID!
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  name: String!
+  talks(sort: String, limit: Int, start: Int, where: JSON): [Talk]
+}
+
+type TagAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type TagConnection {
+  values: [Tag]
+  groupBy: TagGroupBy
+  aggregate: TagAggregator
+}
+
+type TagConnection_id {
+  key: ID
+  connection: TagConnection
+}
+
+type TagConnectionCreatedAt {
+  key: DateTime
+  connection: TagConnection
+}
+
+type TagConnectionId {
+  key: ID
+  connection: TagConnection
+}
+
+type TagConnectionName {
+  key: String
+  connection: TagConnection
+}
+
+type TagConnectionUpdatedAt {
+  key: DateTime
+  connection: TagConnection
+}
+
+type TagGroupBy {
+  _id: [TagConnection_id]
+  id: [TagConnectionId]
+  createdAt: [TagConnectionCreatedAt]
+  updatedAt: [TagConnectionUpdatedAt]
+  name: [TagConnectionName]
+}
+
+input TagInput {
+  name: String!
+  talks: [ID]
 }
 
 type Talk {
@@ -469,8 +472,8 @@ type Talk {
   endsAt: DateTime
   room: Room
   cover: UploadFile
-  speaker: Speaker
-  labels(sort: String, limit: Int, start: Int, where: JSON): [Label]
+  speakers(sort: String, limit: Int, start: Int, where: JSON): [Speaker]
+  tags(sort: String, limit: Int, start: Int, where: JSON): [Tag]
 }
 
 type TalkAggregator {
@@ -519,11 +522,6 @@ type TalkConnectionRoom {
   connection: TalkConnection
 }
 
-type TalkConnectionSpeaker {
-  key: ID
-  connection: TalkConnection
-}
-
 type TalkConnectionStartsAt {
   key: DateTime
   connection: TalkConnection
@@ -550,7 +548,6 @@ type TalkGroupBy {
   endsAt: [TalkConnectionEndsAt]
   room: [TalkConnectionRoom]
   cover: [TalkConnectionCover]
-  speaker: [TalkConnectionSpeaker]
 }
 
 input TalkInput {
@@ -560,17 +557,8 @@ input TalkInput {
   endsAt: DateTime
   room: ID
   cover: ID
-  speaker: ID
-  labels: [ID]
-}
-
-input updateLabelInput {
-  where: InputID
-  data: editLabelInput
-}
-
-type updateLabelPayload {
-  label: Label
+  speakers: [ID]
+  tags: [ID]
 }
 
 input updateRoleInput {
@@ -598,6 +586,15 @@ input updateSpeakerInput {
 
 type updateSpeakerPayload {
   speaker: Speaker
+}
+
+input updateTagInput {
+  where: InputID
+  data: editTagInput
+}
+
+type updateTagPayload {
+  tag: Tag
 }
 
 input updateTalkInput {

@@ -1,9 +1,9 @@
 'use strict';
 
-/* global Label */
+/* global Tag */
 
 /**
- * Label.js service
+ * Tag.js service
  *
  * @description: A set of functions similar to controller's actions to avoid code duplication.
  */
@@ -15,44 +15,44 @@ const { convertRestQueryParams, buildQuery } = require('strapi-utils');
 module.exports = {
 
   /**
-   * Promise to fetch all labels.
+   * Promise to fetch all tags.
    *
    * @return {Promise}
    */
 
   fetchAll: (params, populate) => {
     const filters = convertRestQueryParams(params);
-    const populateOpt = populate || Label.associations
+    const populateOpt = populate || Tag.associations
       .filter(ast => ast.autoPopulate !== false)
       .map(ast => ast.alias)
 
     return buildQuery({
-      model: Label,
+      model: Tag,
       filters,
       populate: populateOpt,
     });
   },
 
   /**
-   * Promise to fetch a/an label.
+   * Promise to fetch a/an tag.
    *
    * @return {Promise}
    */
 
   fetch: (params) => {
     // Select field to populate.
-    const populate = Label.associations
+    const populate = Tag.associations
       .filter(ast => ast.autoPopulate !== false)
       .map(ast => ast.alias)
       .join(' ');
 
-    return Label
-      .findOne(_.pick(params, _.keys(Label.schema.paths)))
+    return Tag
+      .findOne(_.pick(params, _.keys(Tag.schema.paths)))
       .populate(populate);
   },
 
   /**
-   * Promise to count labels.
+   * Promise to count tags.
    *
    * @return {Promise}
    */
@@ -61,64 +61,64 @@ module.exports = {
     const filters = convertRestQueryParams(params);
 
     return buildQuery({
-      model: Label,
+      model: Tag,
       filters: { where: filters.where },
     })
       .count()
   },
 
   /**
-   * Promise to add a/an label.
+   * Promise to add a/an tag.
    *
    * @return {Promise}
    */
 
   add: async (values) => {
     // Extract values related to relational data.
-    const relations = _.pick(values, Label.associations.map(ast => ast.alias));
-    const data = _.omit(values, Label.associations.map(ast => ast.alias));
+    const relations = _.pick(values, Tag.associations.map(ast => ast.alias));
+    const data = _.omit(values, Tag.associations.map(ast => ast.alias));
 
     // Create entry with no-relational data.
-    const entry = await Label.create(data);
+    const entry = await Tag.create(data);
 
     // Create relational data and return the entry.
-    return Label.updateRelations({ _id: entry.id, values: relations });
+    return Tag.updateRelations({ _id: entry.id, values: relations });
   },
 
   /**
-   * Promise to edit a/an label.
+   * Promise to edit a/an tag.
    *
    * @return {Promise}
    */
 
   edit: async (params, values) => {
     // Extract values related to relational data.
-    const relations = _.pick(values, Label.associations.map(a => a.alias));
-    const data = _.omit(values, Label.associations.map(a => a.alias));
+    const relations = _.pick(values, Tag.associations.map(a => a.alias));
+    const data = _.omit(values, Tag.associations.map(a => a.alias));
 
     // Update entry with no-relational data.
-    const entry = await Label.updateOne(params, data, { multi: true });
+    const entry = await Tag.updateOne(params, data, { multi: true });
 
     // Update relational data and return the entry.
-    return Label.updateRelations(Object.assign(params, { values: relations }));
+    return Tag.updateRelations(Object.assign(params, { values: relations }));
   },
 
   /**
-   * Promise to remove a/an label.
+   * Promise to remove a/an tag.
    *
    * @return {Promise}
    */
 
   remove: async params => {
     // Select field to populate.
-    const populate = Label.associations
+    const populate = Tag.associations
       .filter(ast => ast.autoPopulate !== false)
       .map(ast => ast.alias)
       .join(' ');
 
     // Note: To get the full response of Mongo, use the `remove()` method
     // or add spent the parameter `{ passRawResult: true }` as second argument.
-    const data = await Label
+    const data = await Tag
       .findOneAndRemove(params, {})
       .populate(populate);
 
@@ -127,7 +127,7 @@ module.exports = {
     }
 
     await Promise.all(
-      Label.associations.map(async association => {
+      Tag.associations.map(async association => {
         if (!association.via || !data._id || association.dominant) {
           return true;
         }
@@ -148,22 +148,22 @@ module.exports = {
   },
 
   /**
-   * Promise to search a/an label.
+   * Promise to search a/an tag.
    *
    * @return {Promise}
    */
 
   search: async (params) => {
     // Convert `params` object to filters compatible with Mongo.
-    const filters = strapi.utils.models.convertParams('label', params);
+    const filters = strapi.utils.models.convertParams('tag', params);
     // Select field to populate.
-    const populate = Label.associations
+    const populate = Tag.associations
       .filter(ast => ast.autoPopulate !== false)
       .map(ast => ast.alias)
       .join(' ');
 
-    const $or = Object.keys(Label.attributes).reduce((acc, curr) => {
-      switch (Label.attributes[curr].type) {
+    const $or = Object.keys(Tag.attributes).reduce((acc, curr) => {
+      switch (Tag.attributes[curr].type) {
         case 'integer':
         case 'float':
         case 'decimal':
@@ -187,7 +187,7 @@ module.exports = {
       }
     }, []);
 
-    return Label
+    return Tag
       .find({ $or })
       .sort(filters.sort)
       .skip(filters.start)

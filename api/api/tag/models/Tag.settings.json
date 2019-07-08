@@ -1,8 +1,8 @@
 {
   "connection": "default",
-  "collectionName": "label",
+  "collectionName": "Tag",
   "info": {
-    "name": "label",
+    "name": "tag",
     "description": ""
   },
   "options": {
@@ -10,11 +10,13 @@
   },
   "attributes": {
     "name": {
-      "type": "string"
+      "type": "string",
+      "required": true,
+      "unique": true
     },
     "talks": {
       "collection": "talk",
-      "via": "labels"
+      "via": "tags"
     }
   }
 }

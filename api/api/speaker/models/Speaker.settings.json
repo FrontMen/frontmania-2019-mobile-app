@@ -27,6 +27,10 @@
     },
     "bio": {
       "type": "text"
+    },
+    "talks": {
+      "collection": "talk",
+      "via": "speakers"
     }
   }
 }

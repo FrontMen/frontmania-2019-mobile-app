@@ -29,11 +29,13 @@
       "via": "related",
       "plugin": "upload"
     },
-    "speaker": {
-      "model": "speaker"
+    "speakers": {
+      "collection": "speaker",
+      "via": "talks",
+      "dominant": true
     },
-    "labels": {
-      "collection": "label",
+    "tags": {
+      "collection": "tag",
       "dominant": true,
       "via": "talks"
     }

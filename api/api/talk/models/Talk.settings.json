@@ -34,8 +34,8 @@
     },
     "labels": {
       "collection": "label",
-      "via": "talks",
-      "dominant": true
+      "dominant": true,
+      "via": "talks"
     }
   }
 }

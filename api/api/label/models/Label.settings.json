@@ -1,6 +1,6 @@
 {
   "connection": "default",
-  "collectionName": "",
+  "collectionName": "label",
   "info": {
     "name": "label",
     "description": ""
@@ -9,7 +9,7 @@
     "timestamps": true
   },
   "attributes": {
-    "label": {
+    "name": {
       "type": "string"
     },
     "talks": {

@@ -1,3 +1,11 @@
+input createLabelInput {
+  data: LabelInput
+}
+
+type createLabelPayload {
+  label: Label
+}
+
 input createRoleInput {
   data: RoleInput
 }
@@ -42,6 +50,14 @@ type createUserPayload {
 The `DateTime` scalar represents a date and time following the ISO 8601 standard
 """
 scalar DateTime
+
+input deleteLabelInput {
+  where: InputID
+}
+
+type deleteLabelPayload {
+  label: Label
+}
 
 input deleteRoleInput {
   where: InputID
@@ -96,6 +112,11 @@ input editFileInput {
   related: [ID]
 }
 
+input editLabelInput {
+  label: String
+  talks: [ID]
+}
+
 input editRoleInput {
   name: String
   description: String
@@ -124,6 +145,7 @@ input editTalkInput {
   room: ID
   cover: ID
   speaker: ID
+  labels: [ID]
 }
 
 input editUserInput {
@@ -159,12 +181,73 @@ The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://
 """
 scalar JSON
 
+type Label {
+  _id: ID!
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  label: String
+  talks(sort: String, limit: Int, start: Int, where: JSON): [Talk]
+}
+
+type LabelAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type LabelConnection {
+  values: [Label]
+  groupBy: LabelGroupBy
+  aggregate: LabelAggregator
+}
+
+type LabelConnection_id {
+  key: ID
+  connection: LabelConnection
+}
+
+type LabelConnectionCreatedAt {
+  key: DateTime
+  connection: LabelConnection
+}
+
+type LabelConnectionId {
+  key: ID
+  connection: LabelConnection
+}
+
+type LabelConnectionLabel {
+  key: String
+  connection: LabelConnection
+}
+
+type LabelConnectionUpdatedAt {
+  key: DateTime
+  connection: LabelConnection
+}
+
+type LabelGroupBy {
+  _id: [LabelConnection_id]
+  id: [LabelConnectionId]
+  createdAt: [LabelConnectionCreatedAt]
+  updatedAt: [LabelConnectionUpdatedAt]
+  label: [LabelConnectionLabel]
+}
+
+input LabelInput {
+  label: String
+  talks: [ID]
+}
+
 """The `Long` scalar type represents 52-bit integers"""
 scalar Long
 
-union Morph = UsersPermissionsMe | UsersPermissionsMeRole | Room | createRoomPayload | updateRoomPayload | deleteRoomPayload | RoomConnection | RoomAggregator | RoomGroupBy | RoomConnection_id | RoomConnectionId | RoomConnectionCreatedAt | RoomConnectionUpdatedAt | RoomConnectionName | Speaker | createSpeakerPayload | updateSpeakerPayload | deleteSpeakerPayload | SpeakerConnection | SpeakerAggregator | SpeakerGroupBy | SpeakerConnection_id | SpeakerConnectionId | SpeakerConnectionCreatedAt | SpeakerConnectionUpdatedAt | SpeakerConnectionName | SpeakerConnectionEmail | SpeakerConnectionAvatar | SpeakerConnectionCover | SpeakerConnectionBio | Talk | createTalkPayload | updateTalkPayload | deleteTalkPayload | TalkConnection | TalkAggregator | TalkGroupBy | TalkConnection_id | TalkConnectionId | TalkConnectionCreatedAt | TalkConnectionUpdatedAt | TalkConnectionTitle | TalkConnectionDescription | TalkConnectionStartsAt | TalkConnectionEndsAt | TalkConnectionRoom | TalkConnectionCover | TalkConnectionSpeaker | UploadFile | UploadFileConnection | UploadFileAggregator | UploadFileGroupBy | UploadFileConnection_id | UploadFileConnectionId | UploadFileConnectionCreatedAt | UploadFileConnectionUpdatedAt | UploadFileConnectionName | UploadFileConnectionHash | UploadFileConnectionSha256 | UploadFileConnectionExt | UploadFileConnectionMime | UploadFileConnectionSize | UploadFileConnectionUrl | UploadFileConnectionProvider | UploadFileConnectionPublic_id | UsersPermissionsPermission | UsersPermissionsRole | createRolePayload | updateRolePayload | deleteRolePayload | UsersPermissionsRoleConnection | UsersPermissionsRoleAggregator | UsersPermissionsRoleGroupBy | UsersPermissionsRoleConnection_id | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionType | UsersPermissionsUser | createUserPayload | updateUserPayload | deleteUserPayload | UsersPermissionsUserConnection | UsersPermissionsUserAggregator | UsersPermissionsUserGroupBy | UsersPermissionsUserConnection_id | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionUsername | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionRole
+union Morph = UsersPermissionsMe | UsersPermissionsMeRole | Label | createLabelPayload | updateLabelPayload | deleteLabelPayload | LabelConnection | LabelAggregator | LabelGroupBy | LabelConnection_id | LabelConnectionId | LabelConnectionCreatedAt | LabelConnectionUpdatedAt | LabelConnectionLabel | Room | createRoomPayload | updateRoomPayload | deleteRoomPayload | RoomConnection | RoomAggregator | RoomGroupBy | RoomConnection_id | RoomConnectionId | RoomConnectionCreatedAt | RoomConnectionUpdatedAt | RoomConnectionName | Speaker | createSpeakerPayload | updateSpeakerPayload | deleteSpeakerPayload | SpeakerConnection | SpeakerAggregator | SpeakerGroupBy | SpeakerConnection_id | SpeakerConnectionId | SpeakerConnectionCreatedAt | SpeakerConnectionUpdatedAt | SpeakerConnectionName | SpeakerConnectionEmail | SpeakerConnectionAvatar | SpeakerConnectionCover | SpeakerConnectionBio | Talk | createTalkPayload | updateTalkPayload | deleteTalkPayload | TalkConnection | TalkAggregator | TalkGroupBy | TalkConnection_id | TalkConnectionId | TalkConnectionCreatedAt | TalkConnectionUpdatedAt | TalkConnectionTitle | TalkConnectionDescription | TalkConnectionStartsAt | TalkConnectionEndsAt | TalkConnectionRoom | TalkConnectionCover | TalkConnectionSpeaker | UploadFile | UploadFileConnection | UploadFileAggregator | UploadFileGroupBy | UploadFileConnection_id | UploadFileConnectionId | UploadFileConnectionCreatedAt | UploadFileConnectionUpdatedAt | UploadFileConnectionName | UploadFileConnectionHash | UploadFileConnectionSha256 | UploadFileConnectionExt | UploadFileConnectionMime | UploadFileConnectionSize | UploadFileConnectionUrl | UploadFileConnectionProvider | UploadFileConnectionPublic_id | UsersPermissionsPermission | UsersPermissionsRole | createRolePayload | updateRolePayload | deleteRolePayload | UsersPermissionsRoleConnection | UsersPermissionsRoleAggregator | UsersPermissionsRoleGroupBy | UsersPermissionsRoleConnection_id | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionType | UsersPermissionsUser | createUserPayload | updateUserPayload | deleteUserPayload | UsersPermissionsUserConnection | UsersPermissionsUserAggregator | UsersPermissionsUserGroupBy | UsersPermissionsUserConnection_id | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionUsername | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionRole
 
 type Mutation {
+  createLabel(input: createLabelInput): createLabelPayload
+  updateLabel(input: updateLabelInput): updateLabelPayload
+  deleteLabel(input: deleteLabelInput): deleteLabelPayload
   createRoom(input: createRoomInput): createRoomPayload
   updateRoom(input: updateRoomInput): updateRoomPayload
   deleteRoom(input: deleteRoomInput): deleteRoomPayload
@@ -196,6 +279,9 @@ type Mutation {
 }
 
 type Query {
+  label(id: ID!): Label
+  labels(sort: String, limit: Int, start: Int, where: JSON): [Label]
+  labelsConnection(sort: String, limit: Int, start: Int, where: JSON): LabelConnection
   room(id: ID!): Room
   rooms(sort: String, limit: Int, start: Int, where: JSON): [Room]
   roomsConnection(sort: String, limit: Int, start: Int, where: JSON): RoomConnection
@@ -384,6 +470,7 @@ type Talk {
   room: Room
   cover: UploadFile
   speaker: Speaker
+  labels(sort: String, limit: Int, start: Int, where: JSON): [Label]
 }
 
 type TalkAggregator {
@@ -474,6 +561,16 @@ input TalkInput {
   room: ID
   cover: ID
   speaker: ID
+  labels: [ID]
+}
+
+input updateLabelInput {
+  where: InputID
+  data: editLabelInput
+}
+
+type updateLabelPayload {
+  label: Label
 }
 
 input updateRoleInput {

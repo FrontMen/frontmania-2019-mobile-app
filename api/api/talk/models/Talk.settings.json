@@ -31,6 +31,11 @@
     },
     "speaker": {
       "model": "speaker"
+    },
+    "labels": {
+      "collection": "label",
+      "via": "talks",
+      "dominant": true
     }
   }
 }

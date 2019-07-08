@@ -4,7 +4,7 @@ import { TabView, Tab, Layout } from 'react-native-ui-kitten';
 import _ from 'lodash';
 import { Talks } from './talks';
 import { Talk } from '../../types';
-import { useDataProvider } from '../../dataProvider';
+import { useDataProvider } from '../../providers/dataProvider';
 
 const StyledScheduleScreen = styled.View`
   flex: 1 auto;

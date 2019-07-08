@@ -35,6 +35,7 @@ module.exports = {
       'warn',
       { allowExpressions: true, allowTypedFunctionExpressions: true },
     ],
+    'no-case-declarations': 'off',
   },
   settings: {
     'import/extensions': allExtensions,

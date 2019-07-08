@@ -1,9 +1,10 @@
 import React from 'react';
-import { List, ListItem, StyleType } from 'react-native-ui-kitten';
+import { List, ListItem, StyleType, Button } from 'react-native-ui-kitten';
 import styled from 'styled-components/native';
 import _ from 'lodash';
 import { Talk } from '../../types';
 import { formatTime } from '../../utils';
+import { useFavoriteTalks } from '../../providers/favoriteTalksProvider';
 
 const StyledTime = styled.View`
   justify-content: center;
@@ -36,6 +37,16 @@ export const Talks: React.FC<{ talks: Talk[]; onPress: (talk: Talk) => void }> =
   talks,
   onPress,
 }) => {
+  const { items, toggle } = useFavoriteTalks();
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+  const renderFavoriteButton = ({ item }: { item: Talk }) => (): JSX.Element => {
+    return (
+      <Button size="small" onPress={() => toggle(item.id)}>
+        {items.includes(item.id) ? 'Unfav' : 'Fav'}
+      </Button>
+    );
+  };
+
   const renderTalkItem: React.FC<{ item: Talk }> = ({ item }) => {
     return (
       <ListItem
@@ -43,6 +54,7 @@ export const Talks: React.FC<{ talks: Talk[]; onPress: (talk: Talk) => void }> =
         key={item.id}
         title={item.title}
         description={renderTalkDescription(item)}
+        accessory={renderFavoriteButton({ item })}
         onPress={() => onPress(item)}
       />
     );

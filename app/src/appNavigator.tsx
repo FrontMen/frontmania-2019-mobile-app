@@ -8,12 +8,12 @@ import {
   NavigationParams,
 } from 'react-navigation';
 import { TopNavigation } from 'react-native-ui-kitten';
-import { ScheduleScreen } from './screens/scheduleScreen/scheduleScreen';
-import { SpeakerScreen } from './screens/speakerDetailScreen/speakerScreen';
+import { ScheduleScreen } from './screens/scheduleScreen';
+import { SpeakerScreen } from './screens/speakerScreen';
 import { BottomNav } from './bottomNav';
-import { FavoriteScreen } from './screens/favoriteScreen/favoriteScreen';
-import { AboutScreen } from './screens/aboutScreen/aboutScreen';
-import { TalkDetailScreen } from './screens/talkDetailScreen/talkDetailScreen';
+import { FavoriteScreen } from './screens/favoriteScreen';
+import { AboutScreen } from './screens/aboutScreen';
+import { TalkDetailScreen } from './screens/talkDetailScreen';
 
 const defaultTabOptions: StackNavigatorConfig = { headerMode: 'none' };
 

@@ -2,9 +2,9 @@ import _ from 'lodash';
 import React, { useState } from 'react';
 import { Layout, Tab, TabView } from 'react-native-ui-kitten';
 import styled from 'styled-components/native';
-import { TalkList } from '../../components/talkList';
-import { useDataProvider } from '../../providers/dataProvider';
-import { Talk } from '../../types';
+import { TalkList } from '../components/talkList';
+import { useDataProvider } from '../providers/dataProvider';
+import { Talk } from '../types';
 
 const StyledScheduleScreen = styled.View`
   flex: 1 auto;

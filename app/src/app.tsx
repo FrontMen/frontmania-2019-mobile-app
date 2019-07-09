@@ -3,11 +3,11 @@ import { ApplicationProvider } from 'react-native-ui-kitten';
 import styled, { ThemeProvider as StyledComponentsThemeProvider } from 'styled-components/native';
 
 import { GraphQLClient, ClientContext } from 'graphql-hooks';
-import { BottomNav } from './bottomNav';
 import { AppNavigatorContainer } from './appNavigator';
 import { DynamicStatusBar } from './dynamicStatusBar';
 import { evaMapping, evaTheme, theme } from './theme';
-import { DataProvider } from './dataProvider';
+import { DataProvider } from './providers/dataProvider';
+import { FavoriteTalksProvider } from './providers/favoriteTalksProvider';
 
 const Container = styled.View`
   flex: 1;
@@ -23,10 +23,12 @@ export const App: React.FC<{}> = () => (
     <ApplicationProvider mapping={evaMapping} theme={evaTheme}>
       <StyledComponentsThemeProvider theme={theme}>
         <DataProvider>
-          <Container>
-            <DynamicStatusBar />
-            <AppNavigatorContainer />
-          </Container>
+          <FavoriteTalksProvider>
+            <Container>
+              <DynamicStatusBar />
+              <AppNavigatorContainer />
+            </Container>
+          </FavoriteTalksProvider>
         </DataProvider>
       </StyledComponentsThemeProvider>
     </ApplicationProvider>

@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
 import { Text } from 'react-native';
 import { useQuery } from 'graphql-hooks';
-import { Talk, Speaker, Room } from './types';
-import { allDataQuery } from './queries';
-import { normalize } from './utils';
+import { Talk, Speaker, Room } from '../types';
+import { allDataQuery } from '../queries';
+import { normalize } from '../utils';
 
 export interface DataProviderContext {
   speakers: Speaker[];

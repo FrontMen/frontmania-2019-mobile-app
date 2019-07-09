@@ -131,6 +131,7 @@ input editSpeakerInput {
   cover: ID
   bio: String
   talks: [ID]
+  twitter: String
 }
 
 input editTagInput {
@@ -185,7 +186,7 @@ scalar JSON
 """The `Long` scalar type represents 52-bit integers"""
 scalar Long
 
-union Morph = UsersPermissionsMe | UsersPermissionsMeRole | Room | createRoomPayload | updateRoomPayload | deleteRoomPayload | RoomConnection | RoomAggregator | RoomGroupBy | RoomConnection_id | RoomConnectionId | RoomConnectionCreatedAt | RoomConnectionUpdatedAt | RoomConnectionName | Speaker | createSpeakerPayload | updateSpeakerPayload | deleteSpeakerPayload | SpeakerConnection | SpeakerAggregator | SpeakerGroupBy | SpeakerConnection_id | SpeakerConnectionId | SpeakerConnectionCreatedAt | SpeakerConnectionUpdatedAt | SpeakerConnectionName | SpeakerConnectionEmail | SpeakerConnectionAvatar | SpeakerConnectionCover | SpeakerConnectionBio | Tag | createTagPayload | updateTagPayload | deleteTagPayload | TagConnection | TagAggregator | TagGroupBy | TagConnection_id | TagConnectionId | TagConnectionCreatedAt | TagConnectionUpdatedAt | TagConnectionName | Talk | createTalkPayload | updateTalkPayload | deleteTalkPayload | TalkConnection | TalkAggregator | TalkGroupBy | TalkConnection_id | TalkConnectionId | TalkConnectionCreatedAt | TalkConnectionUpdatedAt | TalkConnectionTitle | TalkConnectionDescription | TalkConnectionStartsAt | TalkConnectionEndsAt | TalkConnectionRoom | TalkConnectionCover | UploadFile | UploadFileConnection | UploadFileAggregator | UploadFileGroupBy | UploadFileConnection_id | UploadFileConnectionId | UploadFileConnectionCreatedAt | UploadFileConnectionUpdatedAt | UploadFileConnectionName | UploadFileConnectionHash | UploadFileConnectionSha256 | UploadFileConnectionExt | UploadFileConnectionMime | UploadFileConnectionSize | UploadFileConnectionUrl | UploadFileConnectionProvider | UploadFileConnectionPublic_id | UsersPermissionsPermission | UsersPermissionsRole | createRolePayload | updateRolePayload | deleteRolePayload | UsersPermissionsRoleConnection | UsersPermissionsRoleAggregator | UsersPermissionsRoleGroupBy | UsersPermissionsRoleConnection_id | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionType | UsersPermissionsUser | createUserPayload | updateUserPayload | deleteUserPayload | UsersPermissionsUserConnection | UsersPermissionsUserAggregator | UsersPermissionsUserGroupBy | UsersPermissionsUserConnection_id | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionUsername | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionRole
+union Morph = UsersPermissionsMe | UsersPermissionsMeRole | Room | createRoomPayload | updateRoomPayload | deleteRoomPayload | RoomConnection | RoomAggregator | RoomGroupBy | RoomConnection_id | RoomConnectionId | RoomConnectionCreatedAt | RoomConnectionUpdatedAt | RoomConnectionName | Speaker | createSpeakerPayload | updateSpeakerPayload | deleteSpeakerPayload | SpeakerConnection | SpeakerAggregator | SpeakerGroupBy | SpeakerConnection_id | SpeakerConnectionId | SpeakerConnectionCreatedAt | SpeakerConnectionUpdatedAt | SpeakerConnectionName | SpeakerConnectionEmail | SpeakerConnectionAvatar | SpeakerConnectionCover | SpeakerConnectionBio | SpeakerConnectionTwitter | Tag | createTagPayload | updateTagPayload | deleteTagPayload | TagConnection | TagAggregator | TagGroupBy | TagConnection_id | TagConnectionId | TagConnectionCreatedAt | TagConnectionUpdatedAt | TagConnectionName | Talk | createTalkPayload | updateTalkPayload | deleteTalkPayload | TalkConnection | TalkAggregator | TalkGroupBy | TalkConnection_id | TalkConnectionId | TalkConnectionCreatedAt | TalkConnectionUpdatedAt | TalkConnectionTitle | TalkConnectionDescription | TalkConnectionStartsAt | TalkConnectionEndsAt | TalkConnectionRoom | TalkConnectionCover | UploadFile | UploadFileConnection | UploadFileAggregator | UploadFileGroupBy | UploadFileConnection_id | UploadFileConnectionId | UploadFileConnectionCreatedAt | UploadFileConnectionUpdatedAt | UploadFileConnectionName | UploadFileConnectionHash | UploadFileConnectionSha256 | UploadFileConnectionExt | UploadFileConnectionMime | UploadFileConnectionSize | UploadFileConnectionUrl | UploadFileConnectionProvider | UploadFileConnectionPublic_id | UsersPermissionsPermission | UsersPermissionsRole | createRolePayload | updateRolePayload | deleteRolePayload | UsersPermissionsRoleConnection | UsersPermissionsRoleAggregator | UsersPermissionsRoleGroupBy | UsersPermissionsRoleConnection_id | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionType | UsersPermissionsUser | createUserPayload | updateUserPayload | deleteUserPayload | UsersPermissionsUserConnection | UsersPermissionsUserAggregator | UsersPermissionsUserGroupBy | UsersPermissionsUserConnection_id | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionUsername | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionRole
 
 type Mutation {
   createRoom(input: createRoomInput): createRoomPayload
@@ -323,6 +324,7 @@ type Speaker {
   avatar: UploadFile
   cover: UploadFile
   bio: String
+  twitter: String
   talks(sort: String, limit: Int, start: Int, where: JSON): [Talk]
 }
 
@@ -377,6 +379,11 @@ type SpeakerConnectionName {
   connection: SpeakerConnection
 }
 
+type SpeakerConnectionTwitter {
+  key: String
+  connection: SpeakerConnection
+}
+
 type SpeakerConnectionUpdatedAt {
   key: DateTime
   connection: SpeakerConnection
@@ -392,6 +399,7 @@ type SpeakerGroupBy {
   avatar: [SpeakerConnectionAvatar]
   cover: [SpeakerConnectionCover]
   bio: [SpeakerConnectionBio]
+  twitter: [SpeakerConnectionTwitter]
 }
 
 input SpeakerInput {
@@ -401,6 +409,7 @@ input SpeakerInput {
   cover: ID
   bio: String
   talks: [ID]
+  twitter: String
 }
 
 type Tag {

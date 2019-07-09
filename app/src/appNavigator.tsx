@@ -9,7 +9,7 @@ import {
 } from 'react-navigation';
 import { TopNavigation } from 'react-native-ui-kitten';
 import { ScheduleScreen } from './screens/scheduleScreen';
-import { SpeakerScreen } from './screens/speakerScreen';
+import { SpeakerDetailScreen } from './screens/speakerDetailScreen';
 import { BottomNav } from './bottomNav';
 import { FavoriteScreen } from './screens/favoriteScreen';
 import { AboutScreen } from './screens/aboutScreen';
@@ -28,7 +28,7 @@ const innerNavigationOptions: NavigationParams = { header: TopHeader };
 const ScheduleNavigator = createStackNavigator(
   {
     Schedule: ScheduleScreen,
-    Speaker: SpeakerScreen,
+    Speaker: SpeakerDetailScreen,
     TalkDetail: createStackNavigator(
       { TalkDetail: TalkDetailScreen },
       { defaultNavigationOptions: innerNavigationOptions },

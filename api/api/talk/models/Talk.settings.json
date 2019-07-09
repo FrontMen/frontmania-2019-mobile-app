@@ -31,8 +31,8 @@
     },
     "speakers": {
       "collection": "speaker",
-      "via": "talks",
-      "dominant": true
+      "dominant": true,
+      "via": "talks"
     },
     "tags": {
       "collection": "tag",

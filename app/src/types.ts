@@ -14,6 +14,7 @@ export interface Speaker {
   avatar: Image | null;
   cover: Image | null;
   bio: string;
+  twitter: string;
 }
 
 export interface Tag {

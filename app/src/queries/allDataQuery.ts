@@ -4,6 +4,7 @@ export const allDataQuery = /* GraphQL */ `
       id
       name
       email
+      twitter
       avatar {
         url
       }

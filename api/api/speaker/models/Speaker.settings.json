@@ -31,6 +31,9 @@
     "talks": {
       "collection": "talk",
       "via": "speakers"
+    },
+    "twitter": {
+      "type": "string"
     }
   }
 }

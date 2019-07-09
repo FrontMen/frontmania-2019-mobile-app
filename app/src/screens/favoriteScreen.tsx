@@ -4,6 +4,7 @@ import { TalkList } from '../components/talkList';
 import { useDataProvider } from '../providers/dataProvider';
 import { useFavoriteTalks } from '../providers/favoriteTalksProvider';
 import { Talk } from '../types';
+import { DynamicStatusBar } from '../dynamicStatusBar';
 
 const StyledScheduleScreen = styled.View`
   flex: 1 auto;
@@ -27,6 +28,7 @@ export const FavoriteScreen: React.FC<{ navigation }> = ({ navigation }) => {
   return (
     <StyledScheduleScreen>
       <StyledTabContent>
+        <DynamicStatusBar />
         <TalkList talks={talks} onPress={handleItemPress} />
       </StyledTabContent>
     </StyledScheduleScreen>

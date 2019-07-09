@@ -1,11 +1,11 @@
+import { AntDesign, Octicons } from '@expo/vector-icons';
 import React from 'react';
 import styled from 'styled-components/native';
-import { AntDesign, Octicons } from '@expo/vector-icons';
-import { theme } from '../../theme';
-import { useDataProvider } from '../../providers/dataProvider';
-import { formatTime } from '../../utils';
 import { MarkdownText } from '../../components/markdownText';
 import { Tag } from '../../components/tag';
+import { useDataProvider } from '../../providers/dataProvider';
+import { theme } from '../../theme';
+import { formatTime } from '../../utils';
 
 const StyledTalkDetailScreen = styled.ScrollView`
   display: flex;

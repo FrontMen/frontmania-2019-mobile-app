@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { Layout } from 'react-native-ui-kitten';
 import styled from 'styled-components/native';
-import { TabView, Tab, Layout } from 'react-native-ui-kitten';
-import _ from 'lodash';
-import { Talk } from '../../types';
-import { useDataProvider } from '../../providers/dataProvider';
 import { TalkList } from '../../components/talkList';
+import { useDataProvider } from '../../providers/dataProvider';
 import { useFavoriteTalks } from '../../providers/favoriteTalksProvider';
+import { Talk } from '../../types';
 
 const StyledScheduleScreen = styled.View`
   flex: 1 auto;

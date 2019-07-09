@@ -10,14 +10,14 @@ import { evaMapping, evaTheme, theme } from './theme';
 import { DataProvider } from './providers/dataProvider';
 import { FavoriteTalksProvider } from './providers/favoriteTalksProvider';
 import { usePermissions } from './hooks/usePermission';
+import { env } from './env';
 
 const Container = styled.View`
   flex: 1;
 `;
 
-// TODO: take the url from environment
 const client = new GraphQLClient({
-  url: 'http://192.168.1.140:1337/graphql',
+  url: `${env.endpoint}/graphql`,
 });
 
 export const App: React.FC<{}> = () => {

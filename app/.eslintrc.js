@@ -9,6 +9,9 @@ module.exports = {
     browser: true,
     jest: true,
   },
+  globals: {
+    __DEV__: 'readonly',
+  },
   extends: [
     'airbnb',
     'plugin:@typescript-eslint/recommended',

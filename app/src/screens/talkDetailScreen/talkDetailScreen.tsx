@@ -1,11 +1,12 @@
 import { AntDesign, Octicons } from '@expo/vector-icons';
 import React from 'react';
 import styled from 'styled-components/native';
+import { Avatar } from '../../components/avatar';
 import { MarkdownText } from '../../components/markdownText';
 import { Tag } from '../../components/tag';
 import { useDataProvider } from '../../providers/dataProvider';
 import { theme } from '../../theme';
-import { formatTime } from '../../utils';
+import { formatTime, getImageUrl } from '../../utils';
 
 const StyledTalkDetailScreen = styled.ScrollView`
   display: flex;
@@ -36,7 +37,9 @@ const DescriptionContainer = styled.View`
 
 const TalkInfoBar = styled.View`
   flex-direction: row;
+  margin-top: 10px;
   margin-bottom: 10px;
+  margin-left: 5px;
 `;
 
 const TagsBar = styled.View`
@@ -49,10 +52,16 @@ export const TalkDetailScreen: React.FC<{ navigation }> = ({ navigation }) => {
   const data = useDataProvider();
   const talk = data.talksById[talkId];
   const room = data.roomsById[talk.room.id];
+  const speakers = talk.speakers.map(s => data.speakersById[s.id]);
 
   return (
     <StyledTalkDetailScreen>
       <Title>{talk.title}</Title>
+      {speakers.map(s => (
+        <Avatar key={s.id} image={getImageUrl(s.avatar.url)}>
+          {s.name}
+        </Avatar>
+      ))}
       <TalkInfoBar>
         <AntDesign name="clockcircleo" color="grey" size={15}>
           <IconText>{` ${formatTime(talk.startsAt)} - ${formatTime(talk.endsAt)}`}</IconText>
@@ -63,7 +72,7 @@ export const TalkDetailScreen: React.FC<{ navigation }> = ({ navigation }) => {
       </TalkInfoBar>
       <TagsBar>
         {talk.tags.map(tag => (
-          <Tag text={tag.name} />
+          <Tag key={tag.name} text={tag.name} />
         ))}
       </TagsBar>
       <DescriptionContainer>

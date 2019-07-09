@@ -1,5 +1,4 @@
 import React from 'react';
-import { Layout } from 'react-native-ui-kitten';
 import styled from 'styled-components/native';
 import { TalkList } from '../components/talkList';
 import { useDataProvider } from '../providers/dataProvider';
@@ -10,7 +9,7 @@ const StyledScheduleScreen = styled.View`
   flex: 1 auto;
 `;
 
-const StyledTabContent = styled(Layout)`
+const StyledTabContent = styled.View`
   flex: 1 auto;
   height: 100%;
 `;

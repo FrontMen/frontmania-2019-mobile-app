@@ -1,16 +1,17 @@
 import _ from 'lodash';
 import React, { useState } from 'react';
-import { Layout, Tab, TabView } from 'react-native-ui-kitten';
 import styled from 'styled-components/native';
+import { Tabs, Tab } from 'native-base';
 import { TalkList } from '../components/talkList';
 import { useDataProvider } from '../providers/dataProvider';
 import { Talk } from '../types';
+import { DynamicStatusBar } from '../dynamicStatusBar';
 
 const StyledScheduleScreen = styled.View`
   flex: 1 auto;
 `;
 
-const StyledTabContent = styled(Layout)`
+const StyledTabContent = styled.View`
   flex: 1 auto;
   height: 100%;
 `;
@@ -34,15 +35,16 @@ export const ScheduleScreen: React.FC<{ navigation }> = ({ navigation }) => {
 
   return (
     <StyledScheduleScreen>
-      <TabView selectedIndex={selectedTab} onSelect={setSelectedTab}>
+      <DynamicStatusBar />
+      <Tabs page={selectedTab} onChangeTab={setSelectedTab}>
         {Object.keys(talksByRoom).map(room => (
-          <Tab key={room} title={room}>
+          <Tab key={room} heading={room}>
             <StyledTabContent>
               <TalkList talks={talksByRoom[room]} onPress={handleItemPress} />
             </StyledTabContent>
           </Tab>
         ))}
-      </TabView>
+      </Tabs>
     </StyledScheduleScreen>
   );
 };

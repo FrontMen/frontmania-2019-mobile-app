@@ -60,7 +60,7 @@ export const TalkDetailScreen: React.FC<{ navigation }> = ({ navigation }) => {
       {speakers.map(s => (
         <Avatar
           onPress={() => {
-            navigation.navigate('Speaker', { speakerId: s.id, title: s.name });
+            navigation.navigate('SpeakerDetail', { speakerId: s.id, title: s.name });
           }}
           key={s.id}
           image={getImageUrl(s.avatar.url)}

@@ -1,26 +1,37 @@
+import { Body, Button, Header, Icon, Left, Right, Title } from 'native-base';
 import React from 'react';
 import {
-  createBottomTabNavigator,
   createAppContainer,
+  createBottomTabNavigator,
   createStackNavigator,
-  StackNavigatorConfig,
-  NavigationScreenProps,
   NavigationParams,
+  NavigationScreenProps,
+  StackNavigatorConfig,
 } from 'react-navigation';
-import { TopNavigation } from 'react-native-ui-kitten';
+import { FooterNav } from './components/footerNav';
+import { AboutScreen } from './screens/aboutScreen';
+import { FavoriteScreen } from './screens/favoriteScreen';
 import { ScheduleScreen } from './screens/scheduleScreen';
 import { SpeakerDetailScreen } from './screens/speakerDetailScreen';
-import { FooterNav } from './components/footerNav';
-import { FavoriteScreen } from './screens/favoriteScreen';
-import { AboutScreen } from './screens/aboutScreen';
 import { TalkDetailScreen } from './screens/talkDetailScreen';
 
 const defaultTabOptions: StackNavigatorConfig = { headerMode: 'none' };
 
 const TopHeader: React.FC<NavigationScreenProps> = ({ navigation }) => {
   const title = navigation.getParam('title');
-
-  return <TopNavigation alignment="center" title={title} backIcon />;
+  return (
+    <Header>
+      <Left>
+        <Button transparent onPress={() => navigation.goBack()}>
+          <Icon name="arrow-back" />
+        </Button>
+      </Left>
+      <Body>
+        <Title>{title}</Title>
+      </Body>
+      <Right />
+    </Header>
+  );
 };
 
 const innerNavigationOptions: NavigationParams = { header: TopHeader };
@@ -28,7 +39,10 @@ const innerNavigationOptions: NavigationParams = { header: TopHeader };
 const ScheduleNavigator = createStackNavigator(
   {
     Schedule: ScheduleScreen,
-    Speaker: SpeakerDetailScreen,
+    SpeakerDetail: createStackNavigator(
+      { SpeakerDetail: SpeakerDetailScreen },
+      { defaultNavigationOptions: innerNavigationOptions },
+    ),
     TalkDetail: createStackNavigator(
       { TalkDetail: TalkDetailScreen },
       { defaultNavigationOptions: innerNavigationOptions },

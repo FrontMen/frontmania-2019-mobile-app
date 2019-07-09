@@ -1,18 +1,15 @@
-import React from 'react';
-import { ApplicationProvider } from 'react-native-ui-kitten';
-import styled, { ThemeProvider as StyledComponentsThemeProvider } from 'styled-components/native';
 import * as Permissions from 'expo-permissions';
-import { Container, Header, Content, Footer, FooterTab, Button, Text, Icon } from 'native-base';
-
-import { GraphQLClient, ClientContext } from 'graphql-hooks';
+import { ClientContext, GraphQLClient } from 'graphql-hooks';
+import { Container } from 'native-base';
+import React from 'react';
+import { ThemeProvider as StyledComponentsThemeProvider } from 'styled-components/native';
+import { useNativeBase } from '../useNativeBase';
 import { AppNavigatorContainer } from './appNavigator';
-// import { DynamicStatusBar } from './dynamicStatusBar';
-import { evaMapping, evaTheme, theme } from './theme';
+import { env } from './env';
+import { usePermissions } from './hooks/usePermission';
 import { DataProvider } from './providers/dataProvider';
 import { FavoriteTalksProvider } from './providers/favoriteTalksProvider';
-import { usePermissions } from './hooks/usePermission';
-import { env } from './env';
-import { useNativeBase } from '../useNativeBase';
+import { evaMapping, evaTheme, theme } from './theme';
 
 const client = new GraphQLClient({
   url: `${env.endpoint}/graphql`,
@@ -25,18 +22,15 @@ export const App: React.FC<{}> = () => {
   return (
     permissionStatus && (
       <ClientContext.Provider value={client}>
-        <ApplicationProvider mapping={evaMapping} theme={evaTheme}>
-          <StyledComponentsThemeProvider theme={theme}>
-            <DataProvider>
-              <FavoriteTalksProvider>
-                <Container>
-                  <Header />
-                  <AppNavigatorContainer />
-                </Container>
-              </FavoriteTalksProvider>
-            </DataProvider>
-          </StyledComponentsThemeProvider>
-        </ApplicationProvider>
+        <StyledComponentsThemeProvider theme={theme}>
+          <DataProvider>
+            <FavoriteTalksProvider>
+              <Container>
+                <AppNavigatorContainer />
+              </Container>
+            </FavoriteTalksProvider>
+          </DataProvider>
+        </StyledComponentsThemeProvider>
       </ClientContext.Provider>
     )
   );

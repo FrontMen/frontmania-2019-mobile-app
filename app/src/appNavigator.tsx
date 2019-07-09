@@ -10,7 +10,7 @@ import {
 import { TopNavigation } from 'react-native-ui-kitten';
 import { ScheduleScreen } from './screens/scheduleScreen';
 import { SpeakerDetailScreen } from './screens/speakerDetailScreen';
-import { BottomNav } from './bottomNav';
+import { FooterNav } from './components/footerNav';
 import { FavoriteScreen } from './screens/favoriteScreen';
 import { AboutScreen } from './screens/aboutScreen';
 import { TalkDetailScreen } from './screens/talkDetailScreen';
@@ -59,7 +59,7 @@ const AppNavigator = createBottomTabNavigator(
   },
   {
     initialRouteName: 'Schedule',
-    tabBarComponent: BottomNav,
+    tabBarComponent: FooterNav,
   },
 );
 

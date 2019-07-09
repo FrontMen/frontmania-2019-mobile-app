@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "FrontMania",
-    "slug": "app",
+    "slug": "front-mania",
     "privacy": "public",
     "sdkVersion": "33.0.0",
     "platforms": ["ios", "android", "web"],
@@ -19,6 +19,9 @@
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
+    },
+    "packagerOpts": {
+      "assetExts": ["ttf"]
     }
   }
 }

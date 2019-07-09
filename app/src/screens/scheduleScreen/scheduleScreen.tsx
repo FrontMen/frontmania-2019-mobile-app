@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components/native';
 import { TabView, Tab, Layout } from 'react-native-ui-kitten';
 import _ from 'lodash';
-import { Talks } from './talks';
+import { TalkList } from '../../components/talkList';
 import { Talk } from '../../types';
 import { useDataProvider } from '../../providers/dataProvider';
 
@@ -38,7 +38,7 @@ export const ScheduleScreen: React.FC<{ navigation }> = ({ navigation }) => {
         {Object.keys(talksByRoom).map(room => (
           <Tab key={room} title={room}>
             <StyledTabContent>
-              <Talks talks={talksByRoom[room]} onPress={handleItemPress} />
+              <TalkList talks={talksByRoom[room]} onPress={handleItemPress} />
             </StyledTabContent>
           </Tab>
         ))}

@@ -2,9 +2,9 @@ import React from 'react';
 import { List, ListItem, StyleType, Button } from 'react-native-ui-kitten';
 import styled from 'styled-components/native';
 import _ from 'lodash';
-import { Talk } from '../../types';
-import { formatTime } from '../../utils';
-import { useFavoriteTalks } from '../../providers/favoriteTalksProvider';
+import { Talk } from '../types';
+import { formatTime } from '../utils';
+import { useFavoriteTalks } from '../providers/favoriteTalksProvider';
 
 const StyledTime = styled.View`
   justify-content: center;
@@ -33,7 +33,7 @@ const renderTalkDescription = (item: Talk): string => {
     .join('\n');
 };
 
-export const Talks: React.FC<{ talks: Talk[]; onPress: (talk: Talk) => void }> = ({
+export const TalkList: React.FC<{ talks: Talk[]; onPress: (talk: Talk) => void }> = ({
   talks,
   onPress,
 }) => {

@@ -58,7 +58,13 @@ export const TalkDetailScreen: React.FC<{ navigation }> = ({ navigation }) => {
     <StyledTalkDetailScreen>
       <Title>{talk.title}</Title>
       {speakers.map(s => (
-        <Avatar key={s.id} image={getImageUrl(s.avatar.url)}>
+        <Avatar
+          onPress={() => {
+            navigation.navigate('Speaker', { speakerId: s.id, title: s.name });
+          }}
+          key={s.id}
+          image={getImageUrl(s.avatar.url)}
+        >
           {s.name}
         </Avatar>
       ))}

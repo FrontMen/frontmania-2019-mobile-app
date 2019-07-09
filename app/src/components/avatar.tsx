@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/native';
+import { GestureResponderEvent, TouchableHighlight, TouchableOpacity } from 'react-native';
 
 const StyledImage = styled.Image<{ size: number }>`
   border: 2px solid white;
@@ -19,15 +20,17 @@ const StyledText = styled.Text<{ size: number }>`
   font-size: ${props => (props.size * 2) / 3}px;
 `;
 
-export const Avatar: React.FC<{ size?: number; image: string }> = ({
-  size = 30,
-  image,
-  children,
-}) => {
+export const Avatar: React.FC<{
+  size?: number;
+  image: string;
+  onPress: (event: GestureResponderEvent) => void;
+}> = ({ size = 30, image, children, onPress }) => {
   return (
-    <StyledAvatar>
-      <StyledImage size={size} source={{ uri: image }} />
-      <StyledText size={size}>{children}</StyledText>
-    </StyledAvatar>
+    <TouchableOpacity onPress={onPress}>
+      <StyledAvatar>
+        <StyledImage size={size} source={{ uri: image }} />
+        <StyledText size={size}>{children}</StyledText>
+      </StyledAvatar>
+    </TouchableOpacity>
   );
 };

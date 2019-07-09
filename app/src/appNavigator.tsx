@@ -9,7 +9,7 @@ import {
 } from 'react-navigation';
 import { TopNavigation } from 'react-native-ui-kitten';
 import { ScheduleScreen } from './screens/scheduleScreen/scheduleScreen';
-import { SpeakerScreen } from './screens/speakers/speakerScreen';
+import { SpeakerScreen } from './screens/speakerDetailScreen/speakerScreen';
 import { BottomNav } from './bottomNav';
 import { FavoriteScreen } from './screens/favoriteScreen/favoriteScreen';
 import { AboutScreen } from './screens/aboutScreen/aboutScreen';

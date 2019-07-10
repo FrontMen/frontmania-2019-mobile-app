@@ -7,6 +7,7 @@ export interface AsyncStorageInterface<T> {
   setData: (item: T) => Promise<void>;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function useAsyncStorage<T>(name: string, defaultValue: any = {}): AsyncStorageInterface<T> {
   return useMemo(() => {
     const getData = async (): Promise<T> => {

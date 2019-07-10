@@ -21,8 +21,6 @@ const StyledBadge = styled(Badge)`
   margin-right: 5px;
 `;
 
-const badgeColors = ['red', 'blue', 'green'];
-
 export const TalkList: React.FC<{ talks: Talk[]; onPress: (talk: Talk) => void }> = ({
   talks,
   onPress,
@@ -47,12 +45,8 @@ export const TalkList: React.FC<{ talks: Talk[]; onPress: (talk: Talk) => void }
               </Text>
               <Text note>by {speakerName}</Text>
               <StyledBadgeContainer>
-                {talk.tags.map((tag, index) => (
-                  <StyledBadge
-                    // just an idea to think about
-                    // style={{ backgroundColor: badgeColors[index % badgeColors.length] }}
-                    key={tag.name}
-                  >
+                {talk.tags.map(tag => (
+                  <StyledBadge key={tag.name}>
                     <Text>{tag.name}</Text>
                   </StyledBadge>
                 ))}

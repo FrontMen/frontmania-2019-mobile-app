@@ -1,15 +1,15 @@
 import * as Permissions from 'expo-permissions';
 import { ClientContext, GraphQLClient } from 'graphql-hooks';
-import { Container } from 'native-base';
+import { Container, StyleProvider } from 'native-base';
 import React from 'react';
-import { ThemeProvider as StyledComponentsThemeProvider } from 'styled-components/native';
+import getTheme from './theme/components';
+import material from './theme/variables/material';
 import { useNativeBase } from '../useNativeBase';
 import { AppNavigatorContainer } from './appNavigator';
 import { env } from './env';
 import { usePermissions } from './hooks/usePermission';
 import { DataProvider } from './providers/dataProvider';
 import { FavoriteTalksProvider } from './providers/favoriteTalksProvider';
-import { evaMapping, evaTheme, theme } from './theme';
 
 const client = new GraphQLClient({
   url: `${env.endpoint}/graphql`,
@@ -22,7 +22,7 @@ export const App: React.FC<{}> = () => {
   return (
     permissionStatus && (
       <ClientContext.Provider value={client}>
-        <StyledComponentsThemeProvider theme={theme}>
+        <StyleProvider style={getTheme(material)}>
           <DataProvider>
             <FavoriteTalksProvider>
               <Container>
@@ -30,7 +30,7 @@ export const App: React.FC<{}> = () => {
               </Container>
             </FavoriteTalksProvider>
           </DataProvider>
-        </StyledComponentsThemeProvider>
+        </StyleProvider>
       </ClientContext.Provider>
     )
   );

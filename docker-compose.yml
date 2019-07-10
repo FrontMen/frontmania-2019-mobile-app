@@ -6,8 +6,8 @@ volumes:
 services:
   api:
     build:
-      context: .
-      dockerfile: docker/Dockerfile.api
+      context: ./docker/
+      dockerfile: Dockerfile.api
     environment:
       - APP_NAME=strapi-app
       - DATABASE_CLIENT=mongo
@@ -29,8 +29,8 @@ services:
 
   db:
     build:
-      context: .
-      dockerfile: docker/Dockerfile.db
+      context: ./docker/
+      dockerfile: Dockerfile.db
     environment:
       - MONGO_INITDB_DATABASE=strapi
     ports:

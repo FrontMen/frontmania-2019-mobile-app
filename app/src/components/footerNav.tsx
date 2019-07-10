@@ -27,6 +27,7 @@ export const FooterNav: React.FC<{ navigation }> = ({ navigation }) => {
           const active = route.name === currentRoute.routeName;
           return (
             <Button
+              key={route.name}
               vertical
               active={active}
               onPress={() => {

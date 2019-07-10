@@ -1,3 +1,12 @@
+export interface Config {
+  eventInfo: string;
+}
+
+export interface Question {
+  question: string;
+  answer: string;
+}
+
 export interface Image {
   url: string;
 }

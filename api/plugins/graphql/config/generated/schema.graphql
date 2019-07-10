@@ -1,3 +1,75 @@
+type Config {
+  _id: ID!
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  eventInfo: String
+}
+
+type ConfigAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type ConfigConnection {
+  values: [Config]
+  groupBy: ConfigGroupBy
+  aggregate: ConfigAggregator
+}
+
+type ConfigConnection_id {
+  key: ID
+  connection: ConfigConnection
+}
+
+type ConfigConnectionCreatedAt {
+  key: DateTime
+  connection: ConfigConnection
+}
+
+type ConfigConnectionEventInfo {
+  key: String
+  connection: ConfigConnection
+}
+
+type ConfigConnectionId {
+  key: ID
+  connection: ConfigConnection
+}
+
+type ConfigConnectionUpdatedAt {
+  key: DateTime
+  connection: ConfigConnection
+}
+
+type ConfigGroupBy {
+  _id: [ConfigConnection_id]
+  id: [ConfigConnectionId]
+  createdAt: [ConfigConnectionCreatedAt]
+  updatedAt: [ConfigConnectionUpdatedAt]
+  eventInfo: [ConfigConnectionEventInfo]
+}
+
+input ConfigInput {
+  eventInfo: String
+}
+
+input createConfigInput {
+  data: ConfigInput
+}
+
+type createConfigPayload {
+  config: Config
+}
+
+input createQuestionInput {
+  data: QuestionInput
+}
+
+type createQuestionPayload {
+  question: Question
+}
+
 input createRoleInput {
   data: RoleInput
 }
@@ -51,6 +123,22 @@ The `DateTime` scalar represents a date and time following the ISO 8601 standard
 """
 scalar DateTime
 
+input deleteConfigInput {
+  where: InputID
+}
+
+type deleteConfigPayload {
+  config: Config
+}
+
+input deleteQuestionInput {
+  where: InputID
+}
+
+type deleteQuestionPayload {
+  question: Question
+}
+
 input deleteRoleInput {
   where: InputID
 }
@@ -99,6 +187,10 @@ type deleteUserPayload {
   user: UsersPermissionsUser
 }
 
+input editConfigInput {
+  eventInfo: String
+}
+
 input editFileInput {
   name: String
   hash: String
@@ -110,6 +202,11 @@ input editFileInput {
   provider: String
   public_id: String
   related: [ID]
+}
+
+input editQuestionInput {
+  question: String
+  answer: String
 }
 
 input editRoleInput {
@@ -186,9 +283,15 @@ scalar JSON
 """The `Long` scalar type represents 52-bit integers"""
 scalar Long
 
-union Morph = UsersPermissionsMe | UsersPermissionsMeRole | Room | createRoomPayload | updateRoomPayload | deleteRoomPayload | RoomConnection | RoomAggregator | RoomGroupBy | RoomConnection_id | RoomConnectionId | RoomConnectionCreatedAt | RoomConnectionUpdatedAt | RoomConnectionName | Speaker | createSpeakerPayload | updateSpeakerPayload | deleteSpeakerPayload | SpeakerConnection | SpeakerAggregator | SpeakerGroupBy | SpeakerConnection_id | SpeakerConnectionId | SpeakerConnectionCreatedAt | SpeakerConnectionUpdatedAt | SpeakerConnectionName | SpeakerConnectionEmail | SpeakerConnectionAvatar | SpeakerConnectionCover | SpeakerConnectionBio | SpeakerConnectionTwitter | Tag | createTagPayload | updateTagPayload | deleteTagPayload | TagConnection | TagAggregator | TagGroupBy | TagConnection_id | TagConnectionId | TagConnectionCreatedAt | TagConnectionUpdatedAt | TagConnectionName | Talk | createTalkPayload | updateTalkPayload | deleteTalkPayload | TalkConnection | TalkAggregator | TalkGroupBy | TalkConnection_id | TalkConnectionId | TalkConnectionCreatedAt | TalkConnectionUpdatedAt | TalkConnectionTitle | TalkConnectionDescription | TalkConnectionStartsAt | TalkConnectionEndsAt | TalkConnectionRoom | TalkConnectionCover | UploadFile | UploadFileConnection | UploadFileAggregator | UploadFileGroupBy | UploadFileConnection_id | UploadFileConnectionId | UploadFileConnectionCreatedAt | UploadFileConnectionUpdatedAt | UploadFileConnectionName | UploadFileConnectionHash | UploadFileConnectionSha256 | UploadFileConnectionExt | UploadFileConnectionMime | UploadFileConnectionSize | UploadFileConnectionUrl | UploadFileConnectionProvider | UploadFileConnectionPublic_id | UsersPermissionsPermission | UsersPermissionsRole | createRolePayload | updateRolePayload | deleteRolePayload | UsersPermissionsRoleConnection | UsersPermissionsRoleAggregator | UsersPermissionsRoleGroupBy | UsersPermissionsRoleConnection_id | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionType | UsersPermissionsUser | createUserPayload | updateUserPayload | deleteUserPayload | UsersPermissionsUserConnection | UsersPermissionsUserAggregator | UsersPermissionsUserGroupBy | UsersPermissionsUserConnection_id | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionUsername | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionRole
+union Morph = UsersPermissionsMe | UsersPermissionsMeRole | Config | createConfigPayload | updateConfigPayload | deleteConfigPayload | ConfigConnection | ConfigAggregator | ConfigGroupBy | ConfigConnection_id | ConfigConnectionId | ConfigConnectionCreatedAt | ConfigConnectionUpdatedAt | ConfigConnectionEventInfo | Question | createQuestionPayload | updateQuestionPayload | deleteQuestionPayload | QuestionConnection | QuestionAggregator | QuestionGroupBy | QuestionConnection_id | QuestionConnectionId | QuestionConnectionCreatedAt | QuestionConnectionUpdatedAt | QuestionConnectionQuestion | QuestionConnectionAnswer | Room | createRoomPayload | updateRoomPayload | deleteRoomPayload | RoomConnection | RoomAggregator | RoomGroupBy | RoomConnection_id | RoomConnectionId | RoomConnectionCreatedAt | RoomConnectionUpdatedAt | RoomConnectionName | Speaker | createSpeakerPayload | updateSpeakerPayload | deleteSpeakerPayload | SpeakerConnection | SpeakerAggregator | SpeakerGroupBy | SpeakerConnection_id | SpeakerConnectionId | SpeakerConnectionCreatedAt | SpeakerConnectionUpdatedAt | SpeakerConnectionName | SpeakerConnectionEmail | SpeakerConnectionAvatar | SpeakerConnectionCover | SpeakerConnectionBio | SpeakerConnectionTwitter | Tag | createTagPayload | updateTagPayload | deleteTagPayload | TagConnection | TagAggregator | TagGroupBy | TagConnection_id | TagConnectionId | TagConnectionCreatedAt | TagConnectionUpdatedAt | TagConnectionName | Talk | createTalkPayload | updateTalkPayload | deleteTalkPayload | TalkConnection | TalkAggregator | TalkGroupBy | TalkConnection_id | TalkConnectionId | TalkConnectionCreatedAt | TalkConnectionUpdatedAt | TalkConnectionTitle | TalkConnectionDescription | TalkConnectionStartsAt | TalkConnectionEndsAt | TalkConnectionRoom | TalkConnectionCover | UploadFile | UploadFileConnection | UploadFileAggregator | UploadFileGroupBy | UploadFileConnection_id | UploadFileConnectionId | UploadFileConnectionCreatedAt | UploadFileConnectionUpdatedAt | UploadFileConnectionName | UploadFileConnectionHash | UploadFileConnectionSha256 | UploadFileConnectionExt | UploadFileConnectionMime | UploadFileConnectionSize | UploadFileConnectionUrl | UploadFileConnectionProvider | UploadFileConnectionPublic_id | UsersPermissionsPermission | UsersPermissionsRole | createRolePayload | updateRolePayload | deleteRolePayload | UsersPermissionsRoleConnection | UsersPermissionsRoleAggregator | UsersPermissionsRoleGroupBy | UsersPermissionsRoleConnection_id | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionType | UsersPermissionsUser | createUserPayload | updateUserPayload | deleteUserPayload | UsersPermissionsUserConnection | UsersPermissionsUserAggregator | UsersPermissionsUserGroupBy | UsersPermissionsUserConnection_id | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionUsername | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionRole
 
 type Mutation {
+  createConfig(input: createConfigInput): createConfigPayload
+  updateConfig(input: updateConfigInput): updateConfigPayload
+  deleteConfig(input: deleteConfigInput): deleteConfigPayload
+  createQuestion(input: createQuestionInput): createQuestionPayload
+  updateQuestion(input: updateQuestionInput): updateQuestionPayload
+  deleteQuestion(input: deleteQuestionInput): deleteQuestionPayload
   createRoom(input: createRoomInput): createRoomPayload
   updateRoom(input: updateRoomInput): updateRoomPayload
   deleteRoom(input: deleteRoomInput): deleteRoomPayload
@@ -223,6 +326,12 @@ type Mutation {
 }
 
 type Query {
+  config(id: ID!): Config
+  configs(sort: String, limit: Int, start: Int, where: JSON): [Config]
+  configsConnection(sort: String, limit: Int, start: Int, where: JSON): ConfigConnection
+  question(id: ID!): Question
+  questions(sort: String, limit: Int, start: Int, where: JSON): [Question]
+  questionsConnection(sort: String, limit: Int, start: Int, where: JSON): QuestionConnection
   room(id: ID!): Room
   rooms(sort: String, limit: Int, start: Int, where: JSON): [Room]
   roomsConnection(sort: String, limit: Int, start: Int, where: JSON): RoomConnection
@@ -248,6 +357,70 @@ type Query {
   users(sort: String, limit: Int, start: Int, where: JSON): [UsersPermissionsUser]
   usersConnection(sort: String, limit: Int, start: Int, where: JSON): UsersPermissionsUserConnection
   me: UsersPermissionsMe
+}
+
+type Question {
+  _id: ID!
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  question: String!
+  answer: String
+}
+
+type QuestionAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type QuestionConnection {
+  values: [Question]
+  groupBy: QuestionGroupBy
+  aggregate: QuestionAggregator
+}
+
+type QuestionConnection_id {
+  key: ID
+  connection: QuestionConnection
+}
+
+type QuestionConnectionAnswer {
+  key: String
+  connection: QuestionConnection
+}
+
+type QuestionConnectionCreatedAt {
+  key: DateTime
+  connection: QuestionConnection
+}
+
+type QuestionConnectionId {
+  key: ID
+  connection: QuestionConnection
+}
+
+type QuestionConnectionQuestion {
+  key: String
+  connection: QuestionConnection
+}
+
+type QuestionConnectionUpdatedAt {
+  key: DateTime
+  connection: QuestionConnection
+}
+
+type QuestionGroupBy {
+  _id: [QuestionConnection_id]
+  id: [QuestionConnectionId]
+  createdAt: [QuestionConnectionCreatedAt]
+  updatedAt: [QuestionConnectionUpdatedAt]
+  question: [QuestionConnectionQuestion]
+  answer: [QuestionConnectionAnswer]
+}
+
+input QuestionInput {
+  question: String!
+  answer: String
 }
 
 input RoleInput {
@@ -568,6 +741,24 @@ input TalkInput {
   cover: ID
   speakers: [ID]
   tags: [ID]
+}
+
+input updateConfigInput {
+  where: InputID
+  data: editConfigInput
+}
+
+type updateConfigPayload {
+  config: Config
+}
+
+input updateQuestionInput {
+  where: InputID
+  data: editQuestionInput
+}
+
+type updateQuestionPayload {
+  question: Question
 }
 
 input updateRoleInput {

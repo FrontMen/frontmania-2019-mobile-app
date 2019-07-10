@@ -1,11 +1,13 @@
 import React, { useContext } from 'react';
 import { Text } from 'react-native';
 import { useQuery } from 'graphql-hooks';
-import { Talk, Speaker, Room } from '../types';
+import { Talk, Speaker, Room, Question, Config } from '../types';
 import { allDataQuery } from '../queries';
 import { normalize } from '../utils';
 
 export interface DataProviderContext {
+  config: Config;
+  questions: Question[];
   speakers: Speaker[];
   talks: Talk[];
   rooms: Room[];
@@ -34,6 +36,8 @@ export const DataProvider: React.FC<{}> = ({ children }) => {
   data.talksById = normalize(data.talks);
   data.roomsById = normalize(data.rooms);
   data.speakersById = normalize(data.speakers);
+  // eslint-disable-next-line prefer-destructuring
+  data.config = data.configs[0];
 
   return <DataProviderContext.Provider value={data}>{children}</DataProviderContext.Provider>;
 };

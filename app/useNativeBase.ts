@@ -3,7 +3,7 @@
 /* eslint-disable @typescript-eslint/camelcase */
 /* eslint-disable global-require */
 import { useEffect } from 'react';
-import { Font } from 'expo';
+import { loadAsync } from 'expo-font';
 import { Ionicons } from '@expo/vector-icons';
 
 const fonts = {
@@ -15,7 +15,7 @@ const fonts = {
 export function useNativeBase(): void {
   useEffect(() => {
     async function load(): Promise<void> {
-      await Font.loadAsync(fonts);
+      await loadAsync(fonts);
     }
 
     load();

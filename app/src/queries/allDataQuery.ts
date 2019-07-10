@@ -1,5 +1,15 @@
+// TODO: create separate queries and use them when necessary
 export const allDataQuery = /* GraphQL */ `
   query {
+    configs {
+      eventInfo
+    }
+
+    questions {
+      question
+      answer
+    }
+
     speakers {
       id
       name

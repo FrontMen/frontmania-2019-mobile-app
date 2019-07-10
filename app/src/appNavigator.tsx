@@ -35,18 +35,21 @@ const TopHeader: React.FC<NavigationScreenProps> = ({ navigation }) => {
 };
 
 const innerNavigationOptions: NavigationParams = { header: TopHeader };
+const commonNavigators = {
+  SpeakerDetail: createStackNavigator(
+    { SpeakerDetail: SpeakerDetailScreen },
+    { defaultNavigationOptions: innerNavigationOptions },
+  ),
+  TalkDetail: createStackNavigator(
+    { TalkDetail: TalkDetailScreen },
+    { defaultNavigationOptions: innerNavigationOptions },
+  ),
+};
 
 const ScheduleNavigator = createStackNavigator(
   {
     Schedule: ScheduleScreen,
-    SpeakerDetail: createStackNavigator(
-      { SpeakerDetail: SpeakerDetailScreen },
-      { defaultNavigationOptions: innerNavigationOptions },
-    ),
-    TalkDetail: createStackNavigator(
-      { TalkDetail: TalkDetailScreen },
-      { defaultNavigationOptions: innerNavigationOptions },
-    ),
+    ...commonNavigators,
   },
   { ...defaultTabOptions },
 );
@@ -54,6 +57,7 @@ const ScheduleNavigator = createStackNavigator(
 const FavoriteNavigator = createStackNavigator(
   {
     Favorite: FavoriteScreen,
+    ...commonNavigators,
   },
   { ...defaultTabOptions },
 );

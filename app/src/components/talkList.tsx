@@ -2,12 +2,13 @@ import _ from 'lodash';
 import { Badge, Body, Icon, Left, List, ListItem, Right, Text } from 'native-base';
 import React from 'react';
 import styled from 'styled-components/native';
+import { TouchableOpacity } from 'react-native';
 import { useFavoriteTalks } from '../providers/favoriteTalksProvider';
 import { Talk } from '../types';
 import { formatTime } from '../utils';
 
 const StyledFavoriteButton = styled(Icon)`
-  font-size: 30px;
+  font-size: 40px;
   color: ${props => (props.active ? 'red' : 'grey')};
 `;
 
@@ -58,7 +59,9 @@ export const TalkList: React.FC<{ talks: Talk[]; onPress: (talk: Talk) => void }
               </StyledBadgeContainer>
             </Body>
             <Right style={{ justifyContent: 'center' }}>
-              <StyledFavoriteButton active={isFav} name="heart" onPress={() => toggle(talk.id)} />
+              <TouchableOpacity onPress={() => toggle(talk.id)}>
+                <StyledFavoriteButton active={isFav} name="heart" />
+              </TouchableOpacity>
             </Right>
           </ListItem>
         );

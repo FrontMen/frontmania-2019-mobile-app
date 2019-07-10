@@ -1,26 +1,21 @@
 import { AntDesign, Octicons } from '@expo/vector-icons';
+import { Badge, Text } from 'native-base';
 import React from 'react';
 import styled from 'styled-components/native';
 import { Avatar } from '../components/avatar';
 import { MarkdownText } from '../components/markdownText';
-import { Tag } from '../components/tag';
 import { useDataProvider } from '../providers/dataProvider';
-import { theme } from '../theme';
 import { formatTime, getImageUrl } from '../utils';
 
 const StyledTalkDetailScreen = styled.ScrollView`
   display: flex;
   flex: 1 auto;
-  background-color: ${theme.backgroundBasicColor1};
   padding: 10px;
 `;
 
-const BaseText = styled.Text`
-  color: white;
-`;
+const BaseText = styled(Text)``;
 
 const Title = styled(BaseText)`
-  color: white;
   font-size: 30px;
   font-weight: bold;
   margin: 10px 0;
@@ -45,6 +40,10 @@ const TalkInfoBar = styled.View`
 const TagsBar = styled.View`
   flex-direction: row;
   flex-wrap: wrap;
+`;
+
+const StyledBadge = styled(Badge)`
+  margin-right: 5px;
 `;
 
 export const TalkDetailScreen: React.FC<{ navigation }> = ({ navigation }) => {
@@ -78,7 +77,9 @@ export const TalkDetailScreen: React.FC<{ navigation }> = ({ navigation }) => {
       </TalkInfoBar>
       <TagsBar>
         {talk.tags.map(tag => (
-          <Tag key={tag.name} text={tag.name} />
+          <StyledBadge key={tag.name}>
+            <Text>{tag.name}</Text>
+          </StyledBadge>
         ))}
       </TagsBar>
       <DescriptionContainer>

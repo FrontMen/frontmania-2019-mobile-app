@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import { GestureResponderEvent, TouchableHighlight, TouchableOpacity } from 'react-native';
+import { GestureResponderEvent, TouchableOpacity } from 'react-native';
 
 const StyledImage = styled.Image<{ size: number }>`
-  border: 2px solid white;
+  /* border: 2px solid black; */
   border-radius: ${props => props.size / 2}px;
   width: ${props => props.size}px;
   height: ${props => props.size}px;
@@ -15,7 +15,6 @@ const StyledAvatar = styled.View`
 `;
 
 const StyledText = styled.Text<{ size: number }>`
-  color: white;
   margin: 5px 0 5px 5px;
   font-size: ${props => (props.size * 2) / 3}px;
 `;

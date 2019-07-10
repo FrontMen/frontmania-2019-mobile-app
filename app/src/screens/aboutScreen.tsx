@@ -1,9 +1,9 @@
 import { Accordion, Content, Tab, Tabs } from 'native-base';
 import React, { useCallback } from 'react';
-import Markdown from 'react-native-markdown-renderer';
 import styled from 'styled-components/native';
 import { DynamicStatusBar } from '../dynamicStatusBar';
 import { useDataProvider } from '../providers/dataProvider';
+import { MarkdownText } from '../components/markdownText';
 
 const StyledAboutScreen = styled.View`
   flex: 1 auto;
@@ -15,7 +15,7 @@ export const AboutScreen: React.FC<{}> = () => {
   const renderAnswer = useCallback(item => {
     return (
       <Content padder>
-        <Markdown>{item.content}</Markdown>
+        <MarkdownText>{item.content}</MarkdownText>
       </Content>
     );
   }, []);
@@ -26,7 +26,7 @@ export const AboutScreen: React.FC<{}> = () => {
       <Tabs>
         <Tab heading="EVENT">
           <Content padder>
-            <Markdown>{config.eventInfo}</Markdown>
+            <MarkdownText>{config.eventInfo}</MarkdownText>
           </Content>
         </Tab>
         <Tab heading="FAQ">

@@ -1,23 +1,19 @@
 import { AntDesign, MaterialIcons } from '@expo/vector-icons';
 import React from 'react';
 import styled from 'styled-components/native';
+import { Text } from 'native-base';
 import { MarkdownText } from '../components/markdownText';
 import { useDataProvider } from '../providers/dataProvider';
-import { theme } from '../theme';
 
 const StyledSpeakerDetailScreen = styled.ScrollView`
   display: flex;
   flex: 1 auto;
-  background-color: ${theme.backgroundBasicColor1};
   padding: 10px;
 `;
 
-const BaseText = styled.Text`
-  color: white;
-`;
+const BaseText = styled(Text)``;
 
 const Title = styled(BaseText)`
-  color: white;
   font-size: 30px;
   font-weight: bold;
   margin: 10px 0;

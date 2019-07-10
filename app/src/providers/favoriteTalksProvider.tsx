@@ -40,6 +40,15 @@ export const FavoriteTalksProvider: React.FC<{}> = ({ children }) => {
           await Notifications.cancelScheduledNotificationAsync(notificationByTalkId[id]);
         }
       } else {
+        const notificationTime = new Date(
+          new Date(talk.startsAt).getTime() - NOTIFICATION_TIME_BEFORE_TALK,
+        );
+
+        // if we already passed the notification time, there is no point in scheduling
+        if (notificationTime <= new Date()) {
+          return;
+        }
+
         // we are adding it to the favorites
         const notificationId = await Notifications.scheduleLocalNotificationAsync(
           {
@@ -47,7 +56,7 @@ export const FavoriteTalksProvider: React.FC<{}> = ({ children }) => {
             body: `The talk ${talk.title} is starting in 5 minutes in ${talk.room.name}`,
           },
           {
-            time: new Date(new Date(talk.startsAt).getTime() - NOTIFICATION_TIME_BEFORE_TALK),
+            time: notificationTime,
           },
         );
 

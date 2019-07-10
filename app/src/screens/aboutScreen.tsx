@@ -1,15 +1,11 @@
+import { Accordion, Content, Tab, Tabs } from 'native-base';
 import React, { useCallback } from 'react';
-import { Tabs, Tab, Content, Accordion } from 'native-base';
+import Markdown from 'react-native-markdown-renderer';
 import styled from 'styled-components/native';
 import { DynamicStatusBar } from '../dynamicStatusBar';
 import { useDataProvider } from '../providers/dataProvider';
-import { MarkdownText } from '../components/markdownText';
 
 const StyledAboutScreen = styled.View`
-  flex: 1 auto;
-`;
-
-const StyledMarkdownContainer = styled.View`
   flex: 1 auto;
 `;
 
@@ -18,9 +14,9 @@ export const AboutScreen: React.FC<{}> = () => {
 
   const renderAnswer = useCallback(item => {
     return (
-      <StyledMarkdownContainer>
-        <MarkdownText>{item.content}</MarkdownText>
-      </StyledMarkdownContainer>
+      <Content padder>
+        <Markdown>{item.content}</Markdown>
+      </Content>
     );
   }, []);
 
@@ -29,10 +25,8 @@ export const AboutScreen: React.FC<{}> = () => {
       <DynamicStatusBar />
       <Tabs>
         <Tab heading="EVENT">
-          <Content>
-            <StyledMarkdownContainer>
-              <MarkdownText>{config.eventInfo}</MarkdownText>
-            </StyledMarkdownContainer>
+          <Content padder>
+            <Markdown>{config.eventInfo}</Markdown>
           </Content>
         </Tab>
         <Tab heading="FAQ">

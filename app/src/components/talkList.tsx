@@ -1,33 +1,26 @@
+import _ from 'lodash';
+import { Badge, Body, Icon, Left, List, ListItem, Right, Text } from 'native-base';
 import React from 'react';
 import styled from 'styled-components/native';
-import _ from 'lodash';
-import { List, ListItem, Left, Body, Right, Text, Button, Icon, View } from 'native-base';
+import { useFavoriteTalks } from '../providers/favoriteTalksProvider';
 import { Talk } from '../types';
 import { formatTime } from '../utils';
-import { useFavoriteTalks } from '../providers/favoriteTalksProvider';
-
-const StyledTime = styled.View`
-  justify-content: center;
-  align-items: center;
-`;
-
-const StyledTimeText = styled.Text`
-  color: white;
-  font-weight: bold;
-  width: 50px;
-  flex: 1;
-`;
 
 const StyledFavoriteButton = styled(Icon)`
   font-size: 30px;
   color: ${props => (props.active ? 'red' : 'grey')};
 `;
 
-const Time: React.FC<{ time: Date }> = ({ time }) => (
-  <StyledTime>
-    <StyledTimeText>{formatTime(time)}</StyledTimeText>
-  </StyledTime>
-);
+const StyledBadgeContainer = styled.View`
+  margin-top: 5px;
+  flex-direction: row;
+`;
+
+const StyledBadge = styled(Badge)`
+  margin-right: 5px;
+`;
+
+const badgeColors = ['red', 'blue', 'green'];
 
 export const TalkList: React.FC<{ talks: Talk[]; onPress: (talk: Talk) => void }> = ({
   talks,
@@ -52,6 +45,17 @@ export const TalkList: React.FC<{ talks: Talk[]; onPress: (talk: Talk) => void }
                 {formatTime(talk.startsAt)} - {formatTime(talk.endsAt)}
               </Text>
               <Text note>by {speakerName}</Text>
+              <StyledBadgeContainer>
+                {talk.tags.map((tag, index) => (
+                  <StyledBadge
+                    // just an idea to think about
+                    // style={{ backgroundColor: badgeColors[index % badgeColors.length] }}
+                    key={tag.name}
+                  >
+                    <Text>{tag.name}</Text>
+                  </StyledBadge>
+                ))}
+              </StyledBadgeContainer>
             </Body>
             <Right style={{ justifyContent: 'center' }}>
               <StyledFavoriteButton active={isFav} name="heart" onPress={() => toggle(talk.id)} />

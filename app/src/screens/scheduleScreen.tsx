@@ -4,7 +4,6 @@ import { Tabs, Tab, Container } from 'native-base';
 import { TalkList } from '../components/talkList';
 import { useDataProvider } from '../providers/dataProvider';
 import { Talk } from '../types';
-import { DynamicStatusBar } from '../dynamicStatusBar';
 
 // TODO: check if we use lodash in other places, if not just remove it and refactor here
 const getTalksByRoom = (talks: Talk[]): { [key: string]: Talk[] } => {
@@ -25,7 +24,6 @@ export const ScheduleScreen: React.FC<{ navigation }> = ({ navigation }) => {
 
   return (
     <Container>
-      <DynamicStatusBar />
       <Tabs page={selectedTab} onChangeTab={setSelectedTab}>
         {Object.keys(talksByRoom).map(room => (
           <Tab key={room} heading={room}>

@@ -1,6 +1,5 @@
 import { Accordion, Content, Tab, Tabs, Container } from 'native-base';
 import React, { useCallback } from 'react';
-import { DynamicStatusBar } from '../dynamicStatusBar';
 import { useDataProvider } from '../providers/dataProvider';
 import { MarkdownText } from '../components/markdownText';
 
@@ -17,7 +16,6 @@ export const AboutScreen: React.FC<{}> = () => {
 
   return (
     <Container>
-      <DynamicStatusBar />
       <Tabs>
         <Tab heading="EVENT">
           <Content padder>

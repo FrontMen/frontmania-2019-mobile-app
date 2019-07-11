@@ -1,5 +1,7 @@
+import Constants from 'expo-constants';
 import { Body, Button, Header, Icon, Left, Right, Title } from 'native-base';
 import React from 'react';
+import { Platform } from 'react-native';
 import {
   createAppContainer,
   createBottomTabNavigator,
@@ -15,7 +17,25 @@ import { ScheduleScreen } from './screens/scheduleScreen';
 import { SpeakerDetailScreen } from './screens/speakerDetailScreen';
 import { TalkDetailScreen } from './screens/talkDetailScreen';
 
-const defaultTabOptions: StackNavigatorConfig = { headerMode: 'none' };
+const defaultTabOptions: StackNavigatorConfig = {
+  /**
+   * It's bad to force this on iOS but we don't have a choice right now
+   * if we leave it to default options it will try to float the screen
+   * and there will be a flicker because we are removing the header when it goes to the inner page
+   */
+  headerMode: 'screen',
+  defaultNavigationOptions: {
+    header: () => {
+      return (
+        <Header
+          hasTabs
+          style={{ height: Platform.select({ ios: 0.1, android: Constants.statusBarHeight }) }}
+          noShadow
+        />
+      );
+    },
+  },
+};
 
 const TopHeader: React.FC<NavigationScreenProps> = ({ navigation }) => {
   const title = navigation.getParam('title');
@@ -35,20 +55,38 @@ const TopHeader: React.FC<NavigationScreenProps> = ({ navigation }) => {
 };
 
 const innerNavigationOptions: NavigationParams = { header: TopHeader };
+const innerScreenOptions = Platform.select({
+  ios: {
+    navigationOptions: {
+      header: null,
+    },
+  },
+  android: {},
+});
 const commonNavigators = {
-  SpeakerDetail: createStackNavigator(
-    { SpeakerDetail: SpeakerDetailScreen },
-    { defaultNavigationOptions: innerNavigationOptions },
-  ),
-  TalkDetail: createStackNavigator(
-    { TalkDetail: TalkDetailScreen },
-    { defaultNavigationOptions: innerNavigationOptions },
-  ),
+  TalkDetail: {
+    screen: createStackNavigator(
+      {
+        TalkDetail: TalkDetailScreen,
+      },
+      { defaultNavigationOptions: innerNavigationOptions },
+    ),
+    ...innerScreenOptions,
+  },
+  SpeakerDetail: {
+    screen: createStackNavigator(
+      { SpeakerDetail: SpeakerDetailScreen },
+      { defaultNavigationOptions: innerNavigationOptions },
+    ),
+    ...innerScreenOptions,
+  },
 };
 
 const ScheduleNavigator = createStackNavigator(
   {
-    Schedule: ScheduleScreen,
+    Schedule: {
+      screen: ScheduleScreen,
+    },
     ...commonNavigators,
   },
   { ...defaultTabOptions },
@@ -81,4 +119,4 @@ const AppNavigator = createBottomTabNavigator(
   },
 );
 
-export const AppNavigatorContainer = createAppContainer(AppNavigator);
+export const Router = createAppContainer(AppNavigator);

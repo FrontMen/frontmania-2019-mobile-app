@@ -2,6 +2,7 @@ import * as Permissions from 'expo-permissions';
 import { ClientContext, GraphQLClient } from 'graphql-hooks';
 import { Container, StyleProvider } from 'native-base';
 import React from 'react';
+import { ThemeProvider } from 'styled-components';
 import getTheme from './theme/components';
 import material from './theme/variables/material';
 import { useNativeBase } from '../useNativeBase';
@@ -22,15 +23,17 @@ export const App: React.FC<{}> = () => {
   return (
     permissionStatus && (
       <ClientContext.Provider value={client}>
-        <StyleProvider style={getTheme(material)}>
-          <DataProvider>
-            <FavoriteTalksProvider>
-              <Container>
-                <AppNavigatorContainer />
-              </Container>
-            </FavoriteTalksProvider>
-          </DataProvider>
-        </StyleProvider>
+        <ThemeProvider theme={material}>
+          <StyleProvider style={getTheme(material)}>
+            <DataProvider>
+              <FavoriteTalksProvider>
+                <Container>
+                  <AppNavigatorContainer />
+                </Container>
+              </FavoriteTalksProvider>
+            </DataProvider>
+          </StyleProvider>
+        </ThemeProvider>
       </ClientContext.Provider>
     )
   );

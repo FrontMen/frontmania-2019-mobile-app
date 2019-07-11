@@ -1,3 +1,7 @@
+import themeVariables from './theme/variables/platform';
+
+export type Theme = typeof themeVariables;
+
 export interface Config {
   eventInfo: string;
 }

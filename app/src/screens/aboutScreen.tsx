@@ -1,13 +1,8 @@
-import { Accordion, Content, Tab, Tabs } from 'native-base';
+import { Accordion, Content, Tab, Tabs, Container } from 'native-base';
 import React, { useCallback } from 'react';
-import styled from 'styled-components/native';
 import { DynamicStatusBar } from '../dynamicStatusBar';
 import { useDataProvider } from '../providers/dataProvider';
 import { MarkdownText } from '../components/markdownText';
-
-const StyledAboutScreen = styled.View`
-  flex: 1 auto;
-`;
 
 export const AboutScreen: React.FC<{}> = () => {
   const { config, questions } = useDataProvider();
@@ -21,7 +16,7 @@ export const AboutScreen: React.FC<{}> = () => {
   }, []);
 
   return (
-    <StyledAboutScreen>
+    <Container>
       <DynamicStatusBar />
       <Tabs>
         <Tab heading="EVENT">
@@ -42,6 +37,6 @@ export const AboutScreen: React.FC<{}> = () => {
           </Content>
         </Tab>
       </Tabs>
-    </StyledAboutScreen>
+    </Container>
   );
 };

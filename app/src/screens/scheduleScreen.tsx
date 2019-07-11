@@ -1,20 +1,10 @@
 import _ from 'lodash';
 import React, { useState } from 'react';
-import styled from 'styled-components/native';
-import { Tabs, Tab } from 'native-base';
+import { Tabs, Tab, Container } from 'native-base';
 import { TalkList } from '../components/talkList';
 import { useDataProvider } from '../providers/dataProvider';
 import { Talk } from '../types';
 import { DynamicStatusBar } from '../dynamicStatusBar';
-
-const StyledScheduleScreen = styled.View`
-  flex: 1 auto;
-`;
-
-const StyledTabContent = styled.View`
-  flex: 1 auto;
-  height: 100%;
-`;
 
 // TODO: check if we use lodash in other places, if not just remove it and refactor here
 const getTalksByRoom = (talks: Talk[]): { [key: string]: Talk[] } => {
@@ -34,17 +24,17 @@ export const ScheduleScreen: React.FC<{ navigation }> = ({ navigation }) => {
   }
 
   return (
-    <StyledScheduleScreen>
+    <Container>
       <DynamicStatusBar />
       <Tabs page={selectedTab} onChangeTab={setSelectedTab}>
         {Object.keys(talksByRoom).map(room => (
           <Tab key={room} heading={room}>
-            <StyledTabContent>
+            <Container>
               <TalkList talks={talksByRoom[room]} onPress={handleItemPress} />
-            </StyledTabContent>
+            </Container>
           </Tab>
         ))}
       </Tabs>
-    </StyledScheduleScreen>
+    </Container>
   );
 };

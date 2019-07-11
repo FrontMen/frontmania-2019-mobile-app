@@ -4,7 +4,7 @@ import Markdown from 'react-native-markdown-renderer';
 
 const defaultStyle = StyleSheet.create({});
 
-export const MarkdownText: React.FC<{ style: StyleSheet.NamedStyles<ViewStyle> }> = ({
+export const MarkdownText: React.FC<{ style?: StyleSheet.NamedStyles<ViewStyle> }> = ({
   style,
   children,
 }) => {

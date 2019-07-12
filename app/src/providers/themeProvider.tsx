@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
 import { ThemeProvider as StyledComponentsThemeProvider } from 'styled-components/native';
-import material from '../theme/variables/material';
+import dark from '../theme/variables/dark';
 import { Theme } from '../types';
 
-const ThemeContext = React.createContext<Theme>(material);
+const ThemeContext = React.createContext<Theme>(dark);
 
 export function useTheme(): Theme {
   return useContext(ThemeContext);

@@ -1,18 +1,10 @@
 import React from 'react';
 import styled from 'styled-components/native';
+import { Container } from 'native-base';
 import { TalkList } from '../components/talkList';
 import { useDataProvider } from '../providers/dataProvider';
 import { useFavoriteTalks } from '../providers/favoriteTalksProvider';
 import { Talk } from '../types';
-
-const StyledScheduleScreen = styled.View`
-  flex: 1 auto;
-`;
-
-const StyledTabContent = styled.View`
-  flex: 1 auto;
-  height: 100%;
-`;
 
 export const FavoriteScreen: React.FC<{ navigation }> = ({ navigation }) => {
   const { items: favoriteTalks } = useFavoriteTalks();
@@ -25,10 +17,8 @@ export const FavoriteScreen: React.FC<{ navigation }> = ({ navigation }) => {
   }
 
   return (
-    <StyledScheduleScreen>
-      <StyledTabContent>
-        <TalkList talks={talks} onPress={handleItemPress} />
-      </StyledTabContent>
-    </StyledScheduleScreen>
+    <Container>
+      <TalkList talks={talks} onPress={handleItemPress} />
+    </Container>
   );
 };

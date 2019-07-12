@@ -1,15 +1,9 @@
-import { AntDesign, MaterialIcons } from '@expo/vector-icons';
+import { Container, Content, Text } from 'native-base';
 import React from 'react';
 import styled from 'styled-components/native';
-import { Text } from 'native-base';
+import { IconText } from '../components/iconText';
 import { MarkdownText } from '../components/markdownText';
 import { useDataProvider } from '../providers/dataProvider';
-
-const StyledSpeakerDetailScreen = styled.ScrollView`
-  display: flex;
-  flex: 1 auto;
-  padding: 10px;
-`;
 
 const BaseText = styled(Text)``;
 
@@ -31,30 +25,28 @@ const TalkInfoBar = styled.View`
   margin-left: 5px;
 `;
 
-const IconText = styled(BaseText)`
-  font-size: 16px;
-  color: grey;
-  margin-left: 5px;
-`;
-
 export const SpeakerDetailScreen: React.FC<{ navigation }> = ({ navigation }) => {
   const speakerId = navigation.getParam('speakerId');
   const data = useDataProvider();
   const speaker = data.speakersById[speakerId];
 
   return (
-    <StyledSpeakerDetailScreen>
-      <Title>{speaker.name}</Title>
-      <TalkInfoBar>
-        <MaterialIcons name="email" color="grey" size={15} />
-        <IconText>{speaker.email}</IconText>
-
-        <AntDesign name="twitter" color="grey" size={15} style={{ marginLeft: 5 }} />
-        <IconText>{speaker.twitter}</IconText>
-      </TalkInfoBar>
-      <DescriptionContainer>
-        <MarkdownText>{speaker.bio}</MarkdownText>
-      </DescriptionContainer>
-    </StyledSpeakerDetailScreen>
+    <Container>
+      <Content padder>
+        <Title>{speaker.name}</Title>
+        <TalkInfoBar>
+          <IconText iconType="MaterialIcons" icon="email" text={` ${speaker.email}`} />
+          <IconText
+            style={{ marginLeft: 10 }}
+            iconType="AntDesign"
+            icon="twitter"
+            text={` ${speaker.twitter}`}
+          />
+        </TalkInfoBar>
+        <DescriptionContainer>
+          <MarkdownText>{speaker.bio}</MarkdownText>
+        </DescriptionContainer>
+      </Content>
+    </Container>
   );
 };

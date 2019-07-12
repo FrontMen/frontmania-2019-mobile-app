@@ -17,6 +17,7 @@ const StyledAvatar = styled.View`
 const StyledText = styled.Text<{ size: number }>`
   margin: 5px 0 5px 5px;
   font-size: ${props => (props.size * 2) / 3}px;
+  color: ${props => props.theme.textColor};
 `;
 
 export const Avatar: React.FC<{

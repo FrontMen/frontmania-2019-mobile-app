@@ -9,7 +9,7 @@ import { formatTime } from '../utils';
 
 const StyledFavoriteButton = styled(Icon)`
   font-size: 40px;
-  color: ${props => (props.active ? 'red' : 'grey')};
+  color: ${props => (props.active ? props.theme.brandPrimary : props.theme.listNoteColor)};
 `;
 
 const StyledBadgeContainer = styled.View`

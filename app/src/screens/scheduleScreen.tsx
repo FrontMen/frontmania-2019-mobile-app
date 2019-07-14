@@ -13,7 +13,6 @@ const getTalksByRoom = (talks: Talk[]): { [key: string]: Talk[] } => {
 };
 
 export const ScheduleScreen: React.FC<{ navigation }> = ({ navigation }) => {
-  const [selectedTab, setSelectedTab] = useState(0);
   const data = useDataProvider();
 
   const talksByRoom = getTalksByRoom(data.talks);
@@ -24,7 +23,7 @@ export const ScheduleScreen: React.FC<{ navigation }> = ({ navigation }) => {
 
   return (
     <Container>
-      <Tabs page={selectedTab} onChangeTab={setSelectedTab}>
+      <Tabs>
         {Object.keys(talksByRoom).map(room => (
           <Tab key={room} heading={room}>
             <Container>

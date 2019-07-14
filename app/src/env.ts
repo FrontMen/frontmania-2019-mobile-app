@@ -13,7 +13,7 @@ const definitions: Record<string, Environment> = {
     endpoint: `http://${extractHostname(Constants.linkingUrl)}:1337`,
   },
   production: {
-    endpoint: 'http://api.frontmania.com',
+    endpoint: 'http://fm-2019.nepjua.org:1337',
   },
 };
 

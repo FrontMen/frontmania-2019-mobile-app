@@ -11,6 +11,7 @@ import { AppProvider } from './providers/appProvider';
 import { Router } from './router';
 import getTheme from './theme/components';
 import dark from './theme/variables/dark';
+import { SprayPaint } from './components/sprayPaint/sprayPaint';
 
 const client = new GraphQLClient({
   url: `${env.endpoint}/graphql`,
@@ -20,17 +21,19 @@ export const App: React.FC<{}> = () => {
   const permissionStatus = usePermissions([Permissions.NOTIFICATIONS]);
   useNativeBase();
 
-  return (
-    permissionStatus && (
-      <ClientContext.Provider value={client}>
-        <ThemeProvider theme={dark}>
-          <StyleProvider style={getTheme(dark)}>
-            <AppProvider>
-              <Router />
-            </AppProvider>
-          </StyleProvider>
-        </ThemeProvider>
-      </ClientContext.Provider>
-    )
-  );
+  return <SprayPaint />;
+
+  // return (
+  //   permissionStatus && (
+  //     <ClientContext.Provider value={client}>
+  //       <ThemeProvider theme={dark}>
+  //         <StyleProvider style={getTheme(dark)}>
+  //           <AppProvider>
+  //             <Router />
+  //           </AppProvider>
+  //         </StyleProvider>
+  //       </ThemeProvider>
+  //     </ClientContext.Provider>
+  //   )
+  // );
 };

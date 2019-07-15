@@ -5,7 +5,7 @@ import { ToggleItemMethod, useToggleList } from '../hooks/useToggleList';
 import { useDataProvider } from './dataProvider';
 
 // 5 minutes
-const NOTIFICATION_TIME_BEFORE_TALK = 1000 * 60 * 1;
+const NOTIFICATION_TIME_BEFORE_TALK = 1000 * 60 * 5;
 
 interface FavoriteTalks {
   items: string[];

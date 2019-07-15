@@ -81,26 +81,26 @@ function initSprayPaint(): void {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
+    ctx.fillStyle = 'black';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    // ctx.drawImage(images.backgroundWithLogo, 0, 0);
+
+    // ctx.save();
+
     // ctx.fillStyle = '#FFED00';
-    // ctx.fillRect(0, 0, canvas.width, canvas.height);
-    ctx.drawImage(images.backgroundWithLogo, 0, 0);
+    // ctx.shadowColor = 'white';
+    // ctx.shadowBlur = 10;
+    // ctx.lineJoin = 'round';
+    // ctx.lineCap = 'round';
 
-    ctx.save();
+    // for (let i = 0; i < canvas.width / RADIUS; i++) {
+    //   for (let j = 0; j < canvas.height / RADIUS; j++) {
+    //     spray(ctx, [i * RADIUS, j * RADIUS], 100);
+    //     // arr.push([i * RADIUS, j * RADIUS]);
+    //   }
+    // }
 
-    ctx.fillStyle = '#FFED00';
-    ctx.shadowColor = 'white';
-    ctx.shadowBlur = 10;
-    ctx.lineJoin = 'round';
-    ctx.lineCap = 'round';
-
-    for (let i = 0; i < canvas.width / RADIUS; i++) {
-      for (let j = 0; j < canvas.height / RADIUS; j++) {
-        spray(ctx, [i * RADIUS, j * RADIUS], 100);
-        // arr.push([i * RADIUS, j * RADIUS]);
-      }
-    }
-
-    ctx.restore();
+    // ctx.restore();
   }
 
   function applyStyle(ctx: CanvasRenderingContext2D): void {
@@ -153,10 +153,10 @@ function initSprayPaint(): void {
         return;
       }
 
-      // spray(ctx, touch);
-      ctx.beginPath();
-      ctx.arc(touch[0], touch[1], RADIUS, 0, 2 * Math.PI);
-      ctx.fill();
+      spray(ctx, touch);
+      // ctx.beginPath();
+      // ctx.arc(touch[0], touch[1], RADIUS, 0, 2 * Math.PI);
+      // ctx.fill();
 
       requestAnimationFrame(draw);
     }

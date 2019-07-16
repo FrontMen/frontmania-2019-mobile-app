@@ -1,16 +1,22 @@
-import React from 'react';
-import { WebView, StatusBar } from 'react-native';
+/* eslint-disable global-require */
 import { Container } from 'native-base';
-import { getHtml } from './sprayPaintCanvas';
-import { useTheme } from '../../providers/themeProvider';
+import React from 'react';
+import { StatusBar, WebView } from 'react-native';
 
 export const SprayPaint: React.FC<{}> = () => {
-  const theme = useTheme();
-
   return (
     <Container style={{ flex: 1 }}>
       <StatusBar barStyle="light-content" />
-      <WebView scrollEnabled={false} source={{ html: getHtml({ theme }) }} style={{ flex: 1 }} />
+      <WebView
+        domStorageEnabled
+        scrollEnabled={false}
+        javaScriptEnabled
+        mixedContentMode="always"
+        source={require('../../../assets/splash/index.html')}
+        style={{ flex: 1 }}
+        allowFileAccess
+        originWhitelist={['*']}
+      />
     </Container>
   );
 };

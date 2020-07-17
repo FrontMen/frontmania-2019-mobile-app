@@ -32,7 +32,7 @@
     "expo-font": "^6.0.1",
     "expo-permissions": "^6.0.0",
     "graphql-hooks": "^3.6.0",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.19",
     "native-base": "^2.12.1",
     "native-base-shoutem-theme": "^0.2.3",
     "react": "16.8.3",
